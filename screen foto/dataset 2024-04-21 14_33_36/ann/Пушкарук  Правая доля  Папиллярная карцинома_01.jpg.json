@@ -1,0 +1,166 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 500,
+        "width": 375
+    },
+    "objects": [
+        {
+            "id": 1554128740,
+            "classId": 13121610,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "bibliotaph",
+            "createdAt": "2024-04-21T12:04:44.502Z",
+            "updatedAt": "2024-04-21T12:04:47.641Z",
+            "tags": [],
+            "classTitle": "sagital",
+            "points": {
+                "exterior": [
+                    [
+                        10,
+                        64
+                    ],
+                    [
+                        24,
+                        446
+                    ],
+                    [
+                        335,
+                        446
+                    ],
+                    [
+                        343,
+                        63
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1554128777,
+            "classId": 13121612,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "bibliotaph",
+            "createdAt": "2024-04-21T12:07:25.625Z",
+            "updatedAt": "2024-04-21T12:08:01.595Z",
+            "tags": [],
+            "classTitle": "Thyroid tissue",
+            "bitmap": {
+                "data": "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",
+                "origin": [
+                    162,
+                    141
+                ]
+            }
+        },
+        {
+            "id": 1554128780,
+            "classId": 13121613,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "bibliotaph",
+            "createdAt": "2024-04-21T12:08:08.301Z",
+            "updatedAt": "2024-04-21T12:08:24.011Z",
+            "tags": [],
+            "classTitle": "Node",
+            "bitmap": {
+                "data": "eNoBDwPw/IlQTkcNChoKAAAADUlIRFIAAABhAAAAYAgGAAAADVocBgAAAAFzUkdCAK7OHOkAAALJSURBVHhe7d3bUoQwEEVR+f+PHgstLGYE0ulL0km2zwniWZ5wGdDtq8PX6/V6ab7ttm2bZl72OSE/lDZkS1gjA7kh9Aj+Cm1EDDNClvBHBlEjZA7/EyR7O6oRRgp/FAwRwsjBjwDxiDBT+GeMbMvTJcKs4WeFWBbhAMnQin8IK7Qg2+nsG8KqADtKz0aAcKpFL4g/hJVb0PuADcLFAaJ1I34QaMG7BAiW+9mOc1tCbLTgXq4VBAiF9rSAAEGwhEVDgCBAiL6YAwEEYQJJhkUtSzShAhiEirAih0ZA0IRKMRAqA4sa7g1BExRSIChCi5jiCUETlEIgKIPznuYFwecJBhkQDOF5TvWAoAlGERCMAXpNt0LwQb+DBAgOIXpswgJBEzwEjE/wgeCEYPn0jccgQXBMIMmmNMeG0CbsO7Tac03pEJL8cjbfjVoIXhIJIAIhIFTNJmsgln9nTROwZA4IkpQajJFC3L7HvNpZTYSJGWHfKSDsNBKIJd/ot0cr34IZgTbIw34aWYIo/oERliQ7hBmBNtgRSndYi004doFG2DCe2iBGoBFJEGhFDERVE0CwIdwdG1QIYOgxro4NJgSOEzqMTwgzAq2ohwhDoBV1GGcItybQCBDqEkgy+miDexNYluTCIMizChsZikAb5G47RMhyBEISBCAqIORD60dy+1uWWdhyxHWDDODnpp58qG4kbSjnFo7AsQGEcgIJRjRpAm14lgZhpSbQhnvtZk0AIQkCENcQTZvABVwiBBrxjtGlCTQiEQIYv//VqmsTPlfIFe8zpUNYrRnhH296XIjO3owhEGZuRujDXx4NuNvGLM0IfQwyEuC87ZExQp7KbhX81fcZDePubDTVKaoWdAQMt3fWtCG1mpcVo3Q9NkUTsi5VpfCP/Z4WoffprRRg38/pEVqfVdWEv0wTWi1VmvCXRrAsVZaw705QvgE644Q4Q7sm5gAAAABJRU5ErkJggiAAPvY=",
+                "origin": [
+                    169,
+                    196
+                ]
+            }
+        },
+        {
+            "id": 1554128786,
+            "classId": 13121614,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "bibliotaph",
+            "createdAt": "2024-04-21T12:08:28.727Z",
+            "updatedAt": "2024-04-21T12:11:01.339Z",
+            "tags": [],
+            "classTitle": "Carotis",
+            "bitmap": {
+                "data": "eNoBVwGo/olQTkcNChoKAAAADUlIRFIAAAA4AAAALggGAAAAfQnamAAAAAFzUkdCAK7OHOkAAAERSURBVGhD7dnRDoMgDAXQ9f8/GiMJhFWQVoi0V/Y6wji5HSKl36RPCCFMmup2GiIize+oBpcTvwVqYaRQFXA1qobtQUVAi7CEHQJahvE0W9Bmgp5wd2lWgR5xJ7KWIhSwhrwAvaZX/ifLJL8FREiPbzh/CUIDkXBlijlBaCAiLj0yYoLQQFRcTnADNa/PxsaeJxraCRpLRbMc+ATjRoNcohuoqXerY3eJWk1Gui78BOEP258AIiLTzRrsG/0FiJRi814U5dgGffHL+xNQvQn45osY6HHDUTdAvSChW9g9XHzh7Z3KrT46JDgR0FqpSmG5AdNLMH2/OkktTA1cBX0Kewx8CzoKGwby0h4t4Vkgvq4Diaq4E/LFHTQAAAAASUVORK5CYIJYroTh",
+                "origin": [
+                    116,
+                    192
+                ]
+            }
+        },
+        {
+            "id": 1558813670,
+            "classId": 13121610,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-10T14:14:01.436Z",
+            "updatedAt": "2024-05-10T14:14:01.436Z",
+            "tags": [],
+            "classTitle": "sagital",
+            "points": {
+                "exterior": [
+                    [
+                        9,
+                        42
+                    ],
+                    [
+                        13,
+                        348
+                    ],
+                    [
+                        241,
+                        347
+                    ],
+                    [
+                        244,
+                        52
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1558813751,
+            "classId": 13121610,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-10T14:15:27.939Z",
+            "updatedAt": "2024-05-10T14:15:27.939Z",
+            "tags": [],
+            "classTitle": "sagital",
+            "points": {
+                "exterior": [
+                    [
+                        9,
+                        42
+                    ],
+                    [
+                        13,
+                        348
+                    ],
+                    [
+                        241,
+                        347
+                    ],
+                    [
+                        244,
+                        52
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}

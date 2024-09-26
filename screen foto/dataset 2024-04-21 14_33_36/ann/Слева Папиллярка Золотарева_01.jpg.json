@@ -1,0 +1,81 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 500,
+        "width": 375
+    },
+    "objects": [
+        {
+            "id": 1556454086,
+            "classId": 13121611,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-28T19:46:22.697Z",
+            "updatedAt": "2024-04-28T19:46:26.466Z",
+            "tags": [],
+            "classTitle": "longitudinal",
+            "points": {
+                "exterior": [
+                    [
+                        2,
+                        203
+                    ],
+                    [
+                        0,
+                        424
+                    ],
+                    [
+                        368,
+                        427
+                    ],
+                    [
+                        373,
+                        202
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1556454091,
+            "classId": 13121612,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-28T19:46:30.985Z",
+            "updatedAt": "2024-04-28T19:46:41.249Z",
+            "tags": [],
+            "classTitle": "Thyroid tissue",
+            "bitmap": {
+                "data": "eNoBpQNa/IlQTkcNChoKAAAADUlIRFIAAADEAAAASwgGAAAAL0AoZgAAAAFzUkdCAK7OHOkAAANfSURBVHhe7Z3hdoMgDEbn+z90d7qdtmpFBRLNF+7+TtJwkzuQtm76GeTn8Xg81Kc6TdOkPofo+acEnKH5zzQOgpyhVHdNlRCjNFodwjhXI0h/LU4JgQj9oK+MgBjttHeFQIR2sFFHIst+ZYpCIEPUlrbPC0k+TBHCvr+kI44ux5cQrAzS/WyW/KhiLIRABrN+ShNoNDEQIk3r+k5kFDHeQrA6+DZUlujZxUCILJ164TwyS/EnBKvDhd2U5KWySoEQSRr0zmlkkgMh7uykZK+dQQyESNaUkaajKAhCROqgpLkoiYEQSZsw+rSiSsKxa/TOIb9qAj2yIUQ1bgaoEGgRgy2TSnXJs5lAjRgI0YyZgWoEzogx8S61WlnJt5fAnhgI0UuX8ZIESlIghGQ5SdqCwJYUCGFBlhjSBOZiIIR0KUneisBLCoSwIkocaQIIIV0+kvcg8JSCFcKDLDElCSCEZNlI2pMAK4QnXWLLEUAIuZKRsCcBhPCkS2w5Any4T65kJOxJACE86RJbjgBCyJWMhD0J8I05T7rEliOAEHIlI2FPAgjhSZfYcgQQQq5kJOxJACE86RJbjgD/MEWuZCTsReDvw33z4DxwwAs1cRUIfAnxTBopFEpHjtYE3l8QWgdGCGvUxFMgUBSCVUKhfORoSWDxkIGtwKwSlriJFZXA5mNoECJqucjLk0DxQWUI4Ymd2NEIHD3fdXHsyhFstPKRjxWBIxFer4MQVsSJE47AWQnmiReF4LQpXH1JqECgpfFLMBGCNpMkYCkBK4RkC4ydtJcAa6q7KwTbprGb8M7ZXyUAQtxZZV77kMBdIhyeMnEEe1g7LugkcHfzb6V/uGVi29RZdYYvCESU4PRNNasE3WxBILoETUK8BvHBP4sWGSOGkghV9xCsFGM0sNUsFUVoFoJ7Cqu2yRNHWYDqY9e9srF9ytPULTPJJELXCrGGhxgt7aQ1JmPzNx+7tpQOSVqoxRozigRdp0y1JUOMWmIxrh9Rhif5U2/MeZUIWbzItscdVQTTe4h2/P8jEaOXoM340WW4fYU4KiOiHBGy+T0ifDjeumWqLSeC1BLbvx4RvvlICcFxr40QiFDmKC3EfFqsHqwGFn8u0giBHBvL/+rp7hYNkz1GSiFG31qxJWrX9hcwASwr7SFmyAAAAABJRU5ErkJggnO+k3o=",
+                "origin": [
+                    70,
+                    248
+                ]
+            }
+        },
+        {
+            "id": 1556454116,
+            "classId": 13121613,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-28T19:46:46.182Z",
+            "updatedAt": "2024-04-28T19:46:46.182Z",
+            "tags": [],
+            "classTitle": "Node",
+            "bitmap": {
+                "data": "eNoBSgG1/olQTkcNChoKAAAADUlIRFIAAAArAAAALAgGAAAA/FhBeAAAAAFzUkdCAK7OHOkAAAEESURBVFhH7dhbDoUgDATQy/4XjYEEgwi09CLMJPirkuPY8Kj7Tb68994ypHPOSe+JD7QGsKJEUAc9jP0KWX5ELWk1dhUyR5dgFXYHNKCHsbugKeEc3E12N7RMt4lFgJbp8mORUs3TrSZLg0WE3umWK8fBShsC5f1XzZ5klclJj/Emi1wCcelN0aNDObEMqd7J0mBZoDHZg5Vmd+N9mmTDWexgjX+5+Vo64VIkS4N99A2Qp65XRwYR22p/wtVsr0/LhQ3zBUopSN3vuPlGwEpQmM23Brodq0VWOzIry2EU+kh25cHRAl2OtSKbjbmvZod/odVk833ajBqegewmO6MNOhOZPBfD7K/1D+f0XQAAAABJRU5ErkJggshrkmQ=",
+                "origin": [
+                    166,
+                    266
+                ]
+            }
+        }
+    ]
+}
