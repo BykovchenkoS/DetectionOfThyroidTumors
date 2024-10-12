@@ -1,0 +1,81 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 500,
+        "width": 375
+    },
+    "objects": [
+        {
+            "id": 1555740267,
+            "classId": 13121611,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-25T06:37:13.695Z",
+            "updatedAt": "2024-04-25T06:37:13.695Z",
+            "tags": [],
+            "classTitle": "longitudinal",
+            "points": {
+                "exterior": [
+                    [
+                        5,
+                        166
+                    ],
+                    [
+                        7,
+                        394
+                    ],
+                    [
+                        362,
+                        397
+                    ],
+                    [
+                        351,
+                        168
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1555740282,
+            "classId": 13121612,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-25T06:37:22.173Z",
+            "updatedAt": "2024-04-25T06:38:09.407Z",
+            "tags": [],
+            "classTitle": "Thyroid tissue",
+            "bitmap": {
+                "data": "eNoBQgW9+olQTkcNChoKAAAADUlIRFIAAADLAAAAfAgGAAAAxzRE/gAAAAFzUkdCAK7OHOkAAAT8SURBVHhe7d3RctowEEbh8v4PnQ6dSQrBBtmSpV3p60VvKlm7598zrgOB259Bf76+vr72jr7dbrdBZb0c+67OIzVG6ulI3db+J9B9KI8M38gBO1LnqIEayWdUzyPP3ZUlw7B8AndmmLL2/bvXrH1sZXomx0+zcebfX2SZCfIZIPbEJjBSnCdZiBJ7UFT38Pww4Ln2RxaiGMVsBHrfZciSbULU+0KglzT/ZHFXMYEzELhaGrLMMCV6+CFwpTBkMWjTEbhKGLJMNyoauhO4QhiymK0lCLSQx0/DlhgVTX4TqJGGLOZoeQKlAnkFf/lRAeCRwDtxvDfMrCCwQWBLmqnfdWwKEKgh8FsYstTQtHd6Ao/CkGX6uDVYS+BbGLLUkrR/CQJ3YciyRNSarCVAllqC9i9FwJ1lqbg1W0OALDX07F2KAFmWiluzNQTIUkPP3qUIbMri14yXmgHNFhIgSyEoyxAgixlAoJAAWQpBWYYAWcwAAoUEyFIIyjIEyGIGECgkQJZCUJYhQBYzgEABgd13HXtRsoCeJUsRIMtScWu2hgBZaujZuxQBsiwVt2ZrCJClhp69SxEgy1Jxa7aGAFlq6Nm7FAGyLBW3Zs8SePu5YV5nOYvVvhkJkGXGVPV0CQGyXILVRWckQJYZU9XTJQR2ZfG8cglvF01MgCyJw1N6PwJvv3LCnaVfEE6KT4As8TNSYRACZAkShDLiEyBL/IxUGIQAWYIEoYz4BMgSPyMVBiFAliBBKCM2gY9f7e1Hx7EDVF0/AmTpx9pJyQmQJXmAyu9HgCz9WDspMYGtr71/+URKzyyJE1Z6MwJkaYbShWYn8FEWd5XZR0B/pQTeykKUUozWrUBgVxairBC/Ho8QIMsRWtYuTWBTFneVpWdC8xsEtkS5L7uRxbwg8EyALCYCgUICZCkEZRkCZDEDCBQS2JXlvt9zSyFFy5YgQJYlYtZkKwJeZ2lF0nWmJ+DtLtNHrMFWBMjSiqTrTE+ALNNHrMFWBMjSiqTrTE/A77NMH7EGWxJ4+zv4Xm9pidq1shMgS/YE1d+NgE936YbaQdkJkCV7gurvRuCjLPdKPLt0y8NBgQmQJXA4SotFgCyx8lBNYAJkCRyO0mIRIEusPFQTmABZAoejtFgEyBIrD9UEJkCWwOEoLRaBj7J4jSVWYKoZR4As49g7ORkBsiQLTLnjCJBlHHsnJyNAlmSBKXccAbKMY+/kZATIkiww5Y4jQJZx7J2cjABZkgWm3HEEyDKOvZOTESBLssCUO46AT3cZx97JyQjsyuI9YcmSVO7lBMhyOWIHzEDA97PMkKIeuhAgSxfMDslOYEuUe0+3+1+eV7LHq/6WBMjSkqZrTUtgTxR3lmkj19gZAu9EIcsZovZMR+CTJN8Ne2aZLnoNHSFQKoo7yxGq1k5H4IgoP7L4idh0c6ChNwSOSvL03zCyrDtbZwenhFjElyRq+v33zPL9J2JzJaFYc4xAzcAcO+nY6h7zV9P7kyzuMMfCzbC6Zjgi9NdaoBoeL7K4y0QYkfM11AzD+VOv3dlKmFo2u7KQ5toBaHX12gFoVUeP69RKU8vqoyyk6TEG5WfUBl5+UtyVZ6Rpwa1YlhbozjTZ4txM12gRaqZ+a2otnadWTLvK8gimtNEamJn2tgo0U8+tat2bpdZMh8myBWpVgVqH2moIXeeZQChZ9sKZVSKS5NLxL6kUIGfkPOttAAAAAElFTkSuQmCC6G1htg==",
+                "origin": [
+                    76,
+                    239
+                ]
+            }
+        },
+        {
+            "id": 1555740369,
+            "classId": 13121613,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-25T06:38:17.030Z",
+            "updatedAt": "2024-04-25T06:38:51.195Z",
+            "tags": [],
+            "classTitle": "Node",
+            "bitmap": {
+                "data": "eNoBogRd+4lQTkcNChoKAAAADUlIRFIAAACxAAAAbQgGAAAA7tWAkQAAAAFzUkdCAK7OHOkAAARcSURBVHhe7d3RbtswDIXh+f0fOoM3ZGjXWBJlSjyk/91WFanDb0JaNPHxS/Tf6/V67WjtOI7jqs5sD609d5zpaTUuBxgVxCycqH57dQHdS+j+10MQV4N6fwy2HfiP8T2vbYiBa4NqXf1k2MsRg9fKcf36auCXIgbwepCeFbLidkUMWk9ScXtlw+yCGLxx4FZWzoL5NmIAr2QUv3cGyNOIwRsPbFcH6pCnEAN4Fx+tOqqYzYgBrAUrohs1zCbEAI4go1tTBfMwYgDrYoruLBrzEGIARzPRrx8JuYsYwPqAVDqMggxiFQGF+tiNuYmYW7iQrICj7MLs/q6GgKwoKZzADsgfEXMDC6tI2NpqyCBOiCJry6sw/0DMLZyVSI6+V0AGcY7Zl+rSG/I3xNzCpaxIH8YT8j/EAJaeecnmvCCDuCSPPIfygPwHMbdwnqFX7fQOZhBXVZHwXLOQQZxw2JVbnoF88FKiMol8ZwNxvpnR8YcErJC5iWEklwCI5UZCQ9YEQGxNjPVyCYBYbiQ0ZE0AxNbEWC+VgBXw2Tw/2EmNkGZAjIHUCcwA5iZOPfJazc8CBnEtB6lPA+LU46P5dwKzkPnBDkNSCcxABrHUCGkGxBgokYAVMjdxibHXO4QFMojrzb/EiUBcYowcYhQyNzFWZBMAsexoaMySwAhkbmJLoqwNSaAHGcQhY6GoJYEu4nMz3vFsiZS1EQm0IPO5ExEToeZUAleQ+Sy2qTj5pqgEPkEGcdQ0qDudwP+Q+Xzi6Sj5xqgEQByVPHVdE/gKmccduEbLZrsSAPGupKmzNIE3ZB4BtjRmNl+ZAIhXpsve2xI4IfNY3G1xU2hFAiBekSp7bk0AxFvjptiKBJqIz4L8YdCK2NnTMwEQe6bJXmEJXP5gx00cNhMKGxMAsTEwluslAGK9mdCRMQEQGwNjuV4CINabCR0ZEwCxMTCW6yXQRMxvKPQGRkc/EwAxKtInAOL0I+QAXcS8pACJegIgVp8Q/XUTAHE3IhaoJwBi9QnRXzcBEHcjYoF6AiBWnxD9dRMYQsxvKLo5siAwARAHhk9pnwRA7JMjuwQmAOLA8CntkwCIfXJkl8AEQBwYPqXvJ9B9t/PXErx9/37g7OCfAIj9M2XHzQmAeHPglPNPAMT+mbLj5gRAvDlwyvknAGL/TNlxYwLND9n+1Ae/ndg4HUoNJQDioZhYpJpA88Ezraa5jVVH+ry+QPy8mZc6cfNhjL2TchP3EuLrqxNoPtt5tDiQR5NinXcCVw9KGv4DoHdDIPYeDfuNJuCG+CwI5NHY961rPc6twsxa5zPfxBUC2UdrbaUe3Kvq2S6h3jmnEAP5L49euGsJ++yuDnok42nET4Q8EqgPrbhdVFBbsr6F+Ck/7FkCjePnWzkSszVvF8QVMVuD9CWktdtO0DO5uyJWeokxE4YWHd1uVqGenZk74mjIs0HoksnT2SzuuzNbgnjly4u7B85DInenI6C9ZvkbbZjcKUYbMt4AAAAASUVORK5CYIJaPx2z",
+                "origin": [
+                    95,
+                    245
+                ]
+            }
+        }
+    ]
+}
