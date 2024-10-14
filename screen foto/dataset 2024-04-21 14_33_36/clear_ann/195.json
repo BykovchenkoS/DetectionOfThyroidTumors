@@ -1,0 +1,100 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 500,
+        "width": 375
+    },
+    "objects": [
+        {
+            "id": 1558973795,
+            "classId": 13121610,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-12T21:08:57.880Z",
+            "updatedAt": "2024-05-12T21:09:01.076Z",
+            "tags": [],
+            "classTitle": "sagital",
+            "points": {
+                "exterior": [
+                    [
+                        102,
+                        217
+                    ],
+                    [
+                        103,
+                        344
+                    ],
+                    [
+                        265,
+                        347
+                    ],
+                    [
+                        269,
+                        214
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1558973798,
+            "classId": 13121612,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-12T21:09:05.762Z",
+            "updatedAt": "2024-05-12T21:09:16.258Z",
+            "tags": [],
+            "classTitle": "Thyroid tissue",
+            "bitmap": {
+                "data": "eNoBIwLc/YlQTkcNChoKAAAADUlIRFIAAAB0AAAANQgGAAAAkJ7P7gAAAAFzUkdCAK7OHOkAAAHdSURBVHhe7dnbloMgDAXQ8v8f7ay6KnXwAiGhkpwzjx1Em00wpOnFvykjsCzLUnuwlFIqxxw+qE3C/9tHoAXv7q57WILa+1Rn1AKe3WBDJWg1/LoBI/CunuiNSlCd13r1L9FqWy886CwYButqnSI0aDSsFvRwoIiIe+gwoOiQG6prUCIeN2FXoAS8f4tOf2whYEsZ9B0zJSgRZYj53fnpKUyz5RKyD3I9e+4aRI+DEtIG8udVLuH64cosvG3/6W5zfzUR+6Kr6bEP2XIJKYPUAJZ3MgclZv2sKOOWjTYDJeT/86CMwW60GhQF0nJbtOMzbP2hQJYH95EYFnOLMxQNMiwoKqTkDGiRYdo5TjMUGe8soF7en+vi238BQp7nh0tQYvrHzBlKzOs3l6fsJGhDBeIOlNn5bKuuYU2JhiSCElS0YrwP5pbrXbB4foIGAvWGySq3svgIyux8PAK59cdq92vhMTPzr0Ls5R6TKgzo9tXQszUcaLlm0YAJ+ngpYPsA4UHf4ULKUghQJFQYUBRUKFCEShgSNGq2esbMvVxNjRitWIIHjZSp3jFNMjRK6zACpjmo14IpCuYwUE+wkTCHg1psx1vArYuvaJCnP59pqt2ea6+Qoga7J0bSa/4Ahd3YIncAWPwAAAAASUVORK5CYILmEPif",
+                "origin": [
+                    143,
+                    240
+                ]
+            }
+        },
+        {
+            "id": 1558973800,
+            "classId": 13121613,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-12T21:09:17.763Z",
+            "updatedAt": "2024-05-12T21:09:17.763Z",
+            "tags": [],
+            "classTitle": "Node",
+            "bitmap": {
+                "data": "eNoB3QAi/4lQTkcNChoKAAAADUlIRFIAAAAaAAAAGQgGAAAAL94+YAAAAAFzUkdCAK7OHOkAAACXSURBVEhL7dXdCsAgCAXg+f4P7ShIolz+pF5tlw38OG504Ll8EBHXEQAA25nX4YATuMkSrAHmGSOdCbIiA2yYCvICJugWIez0TaKQZrCriwTYRBnABmUitLpspBaqSNMT/ZB06XLv+11XsboSiGoiM9HcDmmrWyuoX6qRqb46LgySSpRqwpJKGsr+4vOhBvMgpuLzAiPIC41ZY/JCko5bAAAAAElFTkSuQmCCrO1X+g==",
+                "origin": [
+                    181,
+                    253
+                ]
+            }
+        },
+        {
+            "id": 1558973801,
+            "classId": 13121614,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-12T21:09:24.036Z",
+            "updatedAt": "2024-05-12T21:09:24.036Z",
+            "tags": [],
+            "classTitle": "Carotis",
+            "bitmap": {
+                "data": "eNrrDPBz5+WS4mJgYOD19HAJAtJSQCzCwQYkJzvo7gNSjMVB7k4M687JvARyyjxdHEM8vN9ODeQ7oMDhfP23vNTiTm4ln5mfkr8Ed+jrbnxgyCc4MfT0d4YPodO3rqtkeSE3g8VMQf9I0JKVtY67FWTONS5UsDvN1BWgPHUuq5aY2+0w3T0K/q9M9l7fFX/tqYbV88NhhgsXrlr2/V3BVGvP2OPaG1PW/mBZf97/p1r/v61AFzB4uvq5rHNKaAIABrVG0A==",
+                "origin": [
+                    127,
+                    274
+                ]
+            }
+        }
+    ]
+}

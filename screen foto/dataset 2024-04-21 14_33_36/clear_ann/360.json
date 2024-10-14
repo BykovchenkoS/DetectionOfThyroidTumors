@@ -1,0 +1,62 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 500,
+        "width": 375
+    },
+    "objects": [
+        {
+            "id": 1558814033,
+            "classId": 13121611,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-10T14:21:42.841Z",
+            "updatedAt": "2024-05-10T14:21:54.617Z",
+            "tags": [],
+            "classTitle": "longitudinal",
+            "points": {
+                "exterior": [
+                    [
+                        96,
+                        182
+                    ],
+                    [
+                        99,
+                        320
+                    ],
+                    [
+                        285,
+                        322
+                    ],
+                    [
+                        282,
+                        175
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1558814046,
+            "classId": 13121613,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-10T14:21:59.752Z",
+            "updatedAt": "2024-05-10T14:22:07.707Z",
+            "tags": [],
+            "classTitle": "Node",
+            "bitmap": {
+                "data": "eNrrDPBz5+WS4mJgYOD19HAJAtKKQCzPwQYkM6cs2QSkGIuD3J0Y1p2TeQnkbPZ0cQyJcH97PVD4gAAHw4Ov/+tLrPPmzFwmYLul/PXuCU3ZD5xdcnSZGSR+3D0a58K6rMnLQadFZEJCjIe4IdcEB48jOQUnZ2YqmTDUz/ypYMIo8qT1BmOGo1GS+oI2lyOcDpyFLifcNDIKirQ/TbN45Nma377W+OFRraucxjMtWD3fzl+73CZ2uqzolryG3G3lsyQXujF8nTb/8q9yQe08v3yOJMU0BVuHnBwV5jVfnhUwJLlwxlnOvO++r4bj1RKuRKDzGTxd/VzWOSU0AQAo1Vsi",
+                "origin": [
+                    178,
+                    238
+                ]
+            }
+        }
+    ]
+}

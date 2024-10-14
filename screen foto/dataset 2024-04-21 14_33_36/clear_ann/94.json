@@ -1,0 +1,100 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 500,
+        "width": 375
+    },
+    "objects": [
+        {
+            "id": 1555579926,
+            "classId": 13121610,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-23T19:29:53.083Z",
+            "updatedAt": "2024-04-23T19:29:58.668Z",
+            "tags": [],
+            "classTitle": "sagital",
+            "points": {
+                "exterior": [
+                    [
+                        1,
+                        155
+                    ],
+                    [
+                        1,
+                        428
+                    ],
+                    [
+                        372,
+                        430
+                    ],
+                    [
+                        373,
+                        155
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1555579929,
+            "classId": 13121612,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-23T19:30:14.271Z",
+            "updatedAt": "2024-04-23T19:30:54.252Z",
+            "tags": [],
+            "classTitle": "Thyroid tissue",
+            "bitmap": {
+                "data": "eNoBDQXy+olQTkcNChoKAAAADUlIRFIAAACjAAAAcggGAAAAPw5hCgAAAAFzUkdCAK7OHOkAAATHSURBVHhe7dzhlqo6DIZhvf+LdpZu2cthQNI2SdPkPX83lDZ5zldAnfuN/9wq8Hg8HpoXu9/vd83xZo+VajGzi3l2fW2E++tkQQlGY8HWEDPBLIPRG4WxcdHwqyXmIcazxq22uIoAj5Su0rdfGKXNi7w46RpE0ZLooMg928r8H2NPE6MssGfuiZwNLSVKD5+LeGEcaab3YkbmOtS15Cd79/HwdmIU40u0w/suENr/3+DRx2+ruFs1WWthVvOzb+2aV9DqW8/qzTBeTUayaCBeVdHm3yW9sbjyNIwWi2FMvQrMAAlGvf6lG8kbJBjTEdJdkCdIMOr2Lu1oHiiH3zOmrT4L+1MBa5BgBF1TBSxBDn0c2LQKDk5VAQuUXV+USFVVFjNcAS2Yf75Cxovm4d4wwLsCrUibvs9IlalATwWkKE+/6U1C9pSdc84qIAF5+bMDUAJMqwJXIC8xPicCSK12MM43kCKMWwlBCSaNCpyBbMJ4NBGAarSn3hhHIIcxso3Xg6S14j1IMGpVlnGaK2CCkXRs7gMnHLwYV0lGMGJrpAJbQqphBORIOzj3CVIVIyBB1VsBE4y8k+xtB+epJ+O3kvJOEnDfKuCKkW0cjKEwAhKQZxVwT0buKcEYDiMJCcp9BaYlIwkJxnAYSUhQbhWYnoxgBGMojIAE5LMCIZKR+0cwhsNIQtZGGSoZSUgwhqwAn2OHbIvppEImIwlp2vOQg5t+hUxrxSSkViVjjwPG2P0pMzuTnx1YVY90tKrs/HE/f20Q+p6Re8f5WCxnYPZTVctJ8/7Rurr+45v9RQmvpbBde1Xa9jpmf2vHdtq/RwejZ7VtrqX2V8hsptc2KiDb6hXlaMnPopd4gNkXFJBRiMnmIYH4HAmMsnpyVGcFpBCXxcjTdacM59NaIILRuTlVLteKcKvLktv0NnnuHePx7oW4dDICMh7EF6iBPya2dDJy7xgL5AjEFMkIyBggRyGmwQjI+SDBuOsBDzRzUGpATJWMPNDMgTj60PI56+UfYPYtIB19UWqlYspk5P7RD6MmRDD69S3llcAobCvbtbBQnYdpQ0ybjGzVncIaTgNjQ7EA2VishsMtIKZORjA26Go8FIyNBeO9Y2fBLk6zgpg+GUlHfZBgHKwpT9aDBXyfbgmxRDKyXetAfGEZ+K6iZBbpPg78tmgSUkLi+BhriKWSkfvHfogeqQjGsf6UOdsjFcFYhlP/Qr0glsPIVt2OEoztNROfwUOMuFTmT8/7mZR6miYZ5RC9Hlo+Z1QOIyDlID236JL3jGCUYfSGWBYjIK9BgvG6RqpH8DAz79OWoyuXvGfcCgHGvyRmJOI2CzCqZu36g4FxUg9Jxt+Fnwmx9AMMW3UsiGC83W6k4z+Us1MRjO9wqA4yAkQwgjFEIvI0/XHLVDUZoyQiGItjjAaRbbowSDBOep8ouWy1rRqMEhWTjqmEMSJEtukd/CogwTgp8VouWwFjVIgk44HUzCAjQwTjSWxmBBkdIhgLYFwBIS+9L24mM6TjShBJxi8gV8e4GkQwJkzHFRGyTQve+ayUjisjBKMA4/OQ6CAzIASjEGNEkJkAfrah9K8DGzyGSMisCEnGFokfx3pv29kBkoydECWnaWGthHCr6w/IOuRKEduI+gAAAABJRU5ErkJggj05SCo=",
+                "origin": [
+                    89,
+                    238
+                ]
+            }
+        },
+        {
+            "id": 1555579944,
+            "classId": 13121613,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-23T19:31:03.304Z",
+            "updatedAt": "2024-04-23T19:31:17.885Z",
+            "tags": [],
+            "classTitle": "Node",
+            "bitmap": {
+                "data": "eNoBzQEy/olQTkcNChoKAAAADUlIRFIAAABLAAAAOwgGAAAAM2x3KwAAAAFzUkdCAK7OHOkAAAGHSURBVHhe7dvRDoMgDIVhef+HdhmJBhnYHgcY5d91p/HLobhZwzL4s67r2uqUIYTQ6lie4ww5WUug2kWNgOuKNQIpx+uJ1g3rDqgUrgfaX1h3g7j6TMO+dgnrCUg9UubGehpQj15mYj0dqWXCTrHeBNUiaVWsN0OVNgbP7lnEmg3Ku1TBKsSslrIfrJlTZfW1AxZQvzFLUwaW42fABrZjkaq6GliOROW7ZEwWqbLlvukCy3baKwKp8muB5bdawAJLEBBKSRZYgoBQSrLAEgSEUpIFliAglJIssAQBoZRkgSUICKUkCyxBQCglWWAJAkIpyQJLEHCWxgcW/Afv0wLL57TsD1lJli0Glm0UKw6DISTrXA2sC6mKKSNZdbl8AhCsilVpVBKsAlZ1ppRleNQ6G/EmWYmVNQvPfBZYznsDASreOmz1M/cua/ltRlOPdnuRilgzpEwFShf061+h+wcn73zmy5n5F57S21oinS5DdS+5G7AHTMlATpYXUgFML9bzvVE4+bV+AAHu7+wQjsjUAAAAAElFTkSuQmCCEDq++A==",
+                "origin": [
+                    140,
+                    240
+                ]
+            }
+        },
+        {
+            "id": 1555579947,
+            "classId": 13121614,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-04-23T19:31:23.603Z",
+            "updatedAt": "2024-04-23T19:31:40.798Z",
+            "tags": [],
+            "classTitle": "Carotis",
+            "bitmap": {
+                "data": "eNoBbgGR/olQTkcNChoKAAAADUlIRFIAAAA6AAAAMggGAAAADejIRQAAAAFzUkdCAK7OHOkAAAEoSURBVGhD7ZpbDsUgCER1/4v2piY21oDYVnLLQH9t1OOMT8hJ4SulFKranHNWaG6pyq0Nc4BLPUkpaQ7EFtC3gONAaAC/At0NqKn8Eui/gCTwO8pPQb8K+MTqJKgVwDvAF1CrgD0wZ+cTFAGyAVOwFRQJ8uBxA0rBZjQ1ufkKDdorG6DSqcRS+bE4wSva7Buglqwp9dWNdat9kffRy54aoJLxjZWHdY0JJnY3FBWHyNgPfhRFfGEgwyEBamwOSt2FfBwL63o474Z1pcltrdyFovWFoSmDPE9dgDYx4cKGbEiiL0Cy7xhRg1XUBSgbH0VbeUVQhCubmMOAoOos7wgm/UZKrmITqqxsNRJgc6q5zLFVsPHS8clcwKcwsxvVEihVwQ5rawBxsD9kW8fv7PU0vQAAAABJRU5ErkJggtRcnO4=",
+                "origin": [
+                    237,
+                    294
+                ]
+            }
+        }
+    ]
+}

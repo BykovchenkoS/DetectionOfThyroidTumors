@@ -1,0 +1,100 @@
+{
+    "description": "",
+    "tags": [],
+    "size": {
+        "height": 500,
+        "width": 375
+    },
+    "objects": [
+        {
+            "id": 1557922107,
+            "classId": 13121610,
+            "objectId": null,
+            "description": "",
+            "geometryType": "polygon",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-06T17:55:19.249Z",
+            "updatedAt": "2024-05-06T17:55:19.249Z",
+            "tags": [],
+            "classTitle": "sagital",
+            "points": {
+                "exterior": [
+                    [
+                        66,
+                        245
+                    ],
+                    [
+                        69,
+                        388
+                    ],
+                    [
+                        259,
+                        391
+                    ],
+                    [
+                        255,
+                        245
+                    ]
+                ],
+                "interior": []
+            }
+        },
+        {
+            "id": 1557922117,
+            "classId": 13121612,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-06T17:55:33.544Z",
+            "updatedAt": "2024-05-06T17:56:16.426Z",
+            "tags": [],
+            "classTitle": "Thyroid tissue",
+            "bitmap": {
+                "data": "eNoB0AEv/olQTkcNChoKAAAADUlIRFIAAABQAAAANAgGAAAAHXS/4QAAAAFzUkdCAK7OHOkAAAGKSURBVHhe7dpbEoMgDAVQ2f+i6WhH6wNpwg2g5PbbgjmEoEiYjH8xxmjc5BRCCNZtattLxTXfl9mN1YC7C9LyviWQudggwJZouUCtQTVxFQFqOpCMsOU1JZhIPCpApCNLJElbUkgkJnENRDqRBFvzmjtIJKZ9m9kMRDqpidKr7dRgJAEJdxyiXDm4ABLvhyepowdA4n3xJHAr8wZIPD3egr1KEhAAJF4Z3paBBNTVvf0avUxh74CaReP8DEpA5apLwJMAkn2sgWD2EZCA+LYCPIW5AmOfNQIBCVg8j9HpuywinjOQgMW5V/7ue3mQZgZio8ApjPmxBoJ+BCQgIMBVGMDTfjy664qLCDoI3nek0WnsfkfaBNBzFhIQrWHgKV0e7QB3pXm4yBrQ41EPpA7+PeLrYbemKqCHjGwCODJkU8ARnxmbA46Wjd0A98+wb15sHgH45qx8FCD4ZtXlrOJQgD0yeUjAcybXqrEI3na8DZ12rf9vhYnivRYwNWBaVAu8oQA1tdMKb+7zA95h6CnH4YxfAAAAAElFTkSuQmCC1JDJGg==",
+                "origin": [
+                    155,
+                    271
+                ]
+            }
+        },
+        {
+            "id": 1557922136,
+            "classId": 13121613,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-06T17:56:21.074Z",
+            "updatedAt": "2024-05-06T17:56:47.159Z",
+            "tags": [],
+            "classTitle": "Node",
+            "bitmap": {
+                "data": "eNoBUAGv/olQTkcNChoKAAAADUlIRFIAAAA5AAAAKggGAAAACVrzsAAAAAFzUkdCAK7OHOkAAAEKSURBVGhD7dnrDoMgDAXg8f4PjZEEwxiXnqKunHS/wfBxwLg2fG7+xRij9pEhhKCdO5q3/NAVFArSboIa+Sau3gwUCyH/CWulLsWKkNZwaLJTpHVgBo9S7SJ3wUlSbSJ3BfZS/UHuDmxBv5AswBNa3tELyQSs00xIRmCZJjUyQwNriuWRpUemNNmTdCT6X8/yeD+ultNB1uZJIrtleawnaTkdZG2eJLJblsd6kpbTka7trBDQJ5mQXhmQngmD4+gLWXU1na4k2WoXUBWXe/0QmjYBdcNH0qPctnUnwV1lScnb31JFD8FBSAsfDBocjMwT3k51BadGPoG9AzK6dtMXz+zOapJ9GlWv+QA2nqf3EIO4hAAAAABJRU5ErkJggiQHjno=",
+                "origin": [
+                    156,
+                    273
+                ]
+            }
+        },
+        {
+            "id": 1557922149,
+            "classId": 13121614,
+            "objectId": null,
+            "description": "",
+            "geometryType": "bitmap",
+            "labelerLogin": "AIThyroidNod",
+            "createdAt": "2024-05-06T17:56:53.410Z",
+            "updatedAt": "2024-05-06T17:57:23.547Z",
+            "tags": [],
+            "classTitle": "Carotis",
+            "bitmap": {
+                "data": "eNrrDPBz5+WS4mJgYOD19HAJAtIyQCzGwQYkL0/78wlIMRYHuTsxrDsn8xLIafZ0cQzx8H57zZHvgAIHy4F3/+V9k4V7cwWvi1m8PMls5abc0CyjpBSmwWAQHehonMOS2W5wcP2Fzwy2Nix7N3SFh7Du3Si3tzFwApdbMq/uZJ01ESeOmJ1IWfV0xt+20+Fm0ROqlqrOj1up+1h/36Ryk1Vh3RpX1rTP04j9+H9RWP3jW5cNeq9w5raEf3bOrcgFOofB09XPZZ1TQhMAjipLNA==",
+                "origin": [
+                    125,
+                    284
+                ]
+            }
+        }
+    ]
+}
