@@ -3,10 +3,17 @@ from ultralytics import YOLO
 model = YOLO('yolov3.pt')
 
 try:
+    # model.train(data='data_for_yolo.yaml',
+    #             epochs=30,
+    #             batch=8,
+    #             imgsz=416,
+    #             lr0=0.01,
+    #             optimizer='SGD')
+
     model.train(data='data_for_yolo.yaml',
-                epochs=30,
-                batch=8,
-                imgsz=416,
+                epochs=100,
+                batch=16,
+                imgsz=640,
                 lr0=0.01,
                 optimizer='SGD')
 except RuntimeError as e:
