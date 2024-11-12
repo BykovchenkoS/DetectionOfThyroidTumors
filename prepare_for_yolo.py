@@ -13,7 +13,7 @@ class_id_map = {
     13121612: 2,  #Thyroid tissue
     13121613: 3,  #Node
     13121614: 4,  #Carotis
-    13121616: 5  #Jugular
+    13121616: 5   #Jugular
 }
 
 for filename in os.listdir(ann_folder):
@@ -34,7 +34,6 @@ for filename in os.listdir(ann_folder):
                         class_index = class_id_map[class_id]
                         geometry_type = obj.get('geometryType', '')
 
-                        #Обработка полигонов
                         if geometry_type == 'polygon' and 'points' in obj:
                             points = obj['points']['exterior']
                             x_min = min(point[0] for point in points)
@@ -42,17 +41,13 @@ for filename in os.listdir(ann_folder):
                             y_min = min(point[1] for point in points)
                             y_max = max(point[1] for point in points)
 
-                        #Обработка прямоугольников
                         elif geometry_type == 'rectangle' and 'points' in obj:
-                            #Прямоугольники представлены как два угловых координаты
                             x_min = obj['points']['exterior'][0][0]
                             y_min = obj['points']['exterior'][0][1]
                             x_max = obj['points']['exterior'][1][0]
                             y_max = obj['points']['exterior'][1][1]
 
-                        #Обработка битмапов
                         elif geometry_type == 'bitmap' and 'bitmap' in obj:
-                            #Для битмапов используем их origin (верхний левый угол) и размеры
                             origin = obj['bitmap']['origin']
                             bitmap_width = obj['bitmap'].get('width', 0)
                             bitmap_height = obj['bitmap'].get('height', 0)
