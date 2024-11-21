@@ -5,10 +5,10 @@ import cv2
 import numpy as np
 import os
 
-output_dir = "screen foto/dataset 2024-04-21 14_33_36/masks"
+output_dir = "../screen foto/dataset 2024-04-21 14_33_36/masks"
 os.makedirs(output_dir, exist_ok=True)
 
-json_dir = "screen foto/dataset 2024-04-21 14_33_36/clear_ann"
+json_dir = "../screen foto/dataset 2024-04-21 14_33_36/clear_ann"
 
 json_files = [f for f in os.listdir(json_dir) if f.endswith('.json')]
 
