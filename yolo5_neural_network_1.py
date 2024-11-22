@@ -1,6 +1,6 @@
 from ultralytics import YOLO
 
-model = YOLO('yolov5.pt')
+model = YOLO('yolov5mu.pt')
 
 try:
     model.train(data='data_for_yolo.yaml',
@@ -8,8 +8,7 @@ try:
                 batch=16,
                 imgsz=640,
                 lr0=0.01,
-                optimizer='SGD',
-                log=True)
+                optimizer='SGD')
 except RuntimeError as e:
     print(f"Ошибка во время обучения: {e}")
 
