@@ -83,7 +83,7 @@ for json_filename in json_files:
                     yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
                 elif class_name == "Carotis":
                     class_id = 3  # Сонная артерия
-                    yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
+                    yolo1_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
                 elif class_name == "Jugular":
                     class_id = 4  # Яремная вена
                     yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))

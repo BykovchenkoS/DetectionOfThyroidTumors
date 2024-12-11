@@ -1,5 +1,5 @@
 train: C:\ITMO\Diploma\DetectionOfThyroidTumors\screen foto\dataset 2024-04-21 14_33_36\images\train
 val: C:\ITMO\Diploma\DetectionOfThyroidTumors\screen foto\dataset 2024-04-21 14_33_36\images\val
 
-nc: 2
-names: ['sagital_longitudinal', 'Thyroid tissue']
+nc: 3
+names: ['sagital_longitudinal', 'Thyroid tissue', 'Carotis']
