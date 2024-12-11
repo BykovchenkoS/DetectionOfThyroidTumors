@@ -54,7 +54,7 @@ for json_filename in json_files:
                 bbox = normalize_bbox(x_min, y_min, x_max, y_max, img_width, img_height)
 
                 if class_name in ["sagital", "longitudinal"]:
-                    class_id = 0  # Объединённый класс
+                    class_id = 0
                     yolo1_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
 
         elif obj['geometryType'] == 'bitmap' and 'bitmap' in obj:
@@ -78,14 +78,14 @@ for json_filename in json_files:
                 if class_name == "Thyroid tissue":
                     class_id = 1  # Щитовидка
                     yolo1_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
-                elif class_name == "Node":
-                    class_id = 2  # Узел
-                    yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
                 elif class_name == "Carotis":
-                    class_id = 3  # Сонная артерия
+                    class_id = 2  # Сонная артерия
                     yolo1_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
+                elif class_name == "Node":
+                    class_id = 1  # Узел
+                    yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
                 elif class_name == "Jugular":
-                    class_id = 4  # Яремная вена
+                    class_id = 2  # Яремная вена
                     yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
 
             except Exception as e:
