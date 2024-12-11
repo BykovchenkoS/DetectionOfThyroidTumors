@@ -33,10 +33,9 @@ def split_dataset(image_dir, label_dir, dest_dir, test_size=0.2):
             shutil.copy(os.path.join(image_dir, image), os.path.join(train_image_dir, image))
             shutil.copy(os.path.join(label_dir, label_file), os.path.join(train_label_dir, label_file))
 
-    print(f"Dataset split completed: {len(train_images)} val for training, {len(test_images)} val for testing.")
+    print(f"Dataset split completed: {len(train_images)} train for training, {len(test_images)} val for testing.")
 
 
-# Пример использования
 image_directory = 'screen foto/dataset 2024-04-21 14_33_36/img'
 label_directory = 'screen foto/dataset 2024-04-21 14_33_36/yolo1_ann'
 destination_directory = 'screen foto/dataset 2024-04-21 14_33_36/split'
