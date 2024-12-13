@@ -6,7 +6,7 @@ import numpy as np
 import os
 
 IMG_DIR = "screen foto/dataset 2024-04-21 14_33_36/img"
-JSON_DIR = "screen foto/dataset 2024-04-21 14_33_36/clear_ann"
+JSON_DIR = "screen foto/dataset 2024-04-21 14_33_36/shifted_json"
 YOLO1_DIR = "screen foto/dataset 2024-04-21 14_33_36/yolo1_ann"
 YOLO2_DIR = "screen foto/dataset 2024-04-21 14_33_36/yolo2_ann"
 
@@ -82,10 +82,10 @@ for json_filename in json_files:
                     class_id = 2  # Сонная артерия
                     yolo1_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
                 elif class_name == "Node":
-                    class_id = 1  # Узел
+                    class_id = 0  # Узел
                     yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
                 elif class_name == "Jugular":
-                    class_id = 2  # Яремная вена
+                    class_id = 1  # Яремная вена
                     yolo2_annotations.append(f"{class_id} " + " ".join(map(str, bbox)))
 
             except Exception as e:
