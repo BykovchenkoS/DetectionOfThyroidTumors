@@ -38,8 +38,8 @@ def split_dataset(image_dir, label_dir, dest_dir, test_size=0.2):
 
     print(f"Dataset split completed: {len(train_images)} train for training, {len(test_images)} val for testing.")
 
-image_directory = 'screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid'
-label_directory = 'screen foto/dataset 2024-04-21 14_33_36/yolo2_ann'
+image_directory = 'screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis'
+label_directory = 'screen foto/dataset 2024-04-21 14_33_36/yolo_annotations'
 destination_directory = 'screen foto/dataset 2024-04-21 14_33_36/split'
 
 split_dataset(image_directory, label_directory, destination_directory)
