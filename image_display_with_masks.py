@@ -4,6 +4,7 @@ import numpy as np
 import os
 import json
 
+
 def process_image(photo_number):
     json_path = f'screen foto/dataset 2024-04-21 14_33_36/clear_ann/{photo_number}.json'
     image_path = f'screen foto/dataset 2024-04-21 14_33_36/img/{photo_number}.jpg'

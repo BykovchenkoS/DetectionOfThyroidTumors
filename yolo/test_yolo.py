@@ -3,10 +3,10 @@ import cv2
 from pathlib import Path
 import os
 
-weights_path = 'yolo/train_yolo5_2/weights/best.pt'
+weights_path = 'train_yolo5_2/weights/best.pt'
 model = YOLO(weights_path)
 
-images_path = 'screen foto/dataset 2024-04-21 14_33_36/images_neuro_2/train'
+images_path = '../screen foto/dataset 2024-04-21 14_33_36/images_neuro_2/train'
 image_files = list(Path(images_path).glob('*.jpg'))
 
 results_dir = 'predict_yolo_5_node'

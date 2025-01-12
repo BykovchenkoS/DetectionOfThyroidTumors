@@ -1,3 +1,5 @@
+
+
 from ultralytics import YOLO
 
 model = YOLO('yolov5mu.pt')

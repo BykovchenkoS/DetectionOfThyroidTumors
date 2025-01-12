@@ -52,7 +52,7 @@ def visualize_yolo_annotations(image_dir, yolo_dir, output_dir):
 
 
 if __name__ == "__main__":
-    image_dir = "screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis/"
+    image_dir = "../screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis/"
     yolo_dir = "screen foto/dataset 2024-04-21 14_33_36/yolo_annotations/"
     output_dir = "output_visualized_labels_for_yolo2/"
 

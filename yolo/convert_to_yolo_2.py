@@ -64,9 +64,9 @@ def process_image(json_path, image_path, masks_dir, yolo_output_dir):
         save_yolo_annotation(photo_number, annotations, yolo_output_dir)
 
 def process_all_json():
-    json_dir = 'screen foto/dataset 2024-04-21 14_33_36/shifted_json/'
-    image_dir = 'screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis/'
-    masks_dir = 'screen foto/dataset 2024-04-21 14_33_36/masks/'
+    json_dir = '../screen foto/dataset 2024-04-21 14_33_36/shifted_json/'
+    image_dir = '../screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis/'
+    masks_dir = '../screen foto/dataset 2024-04-21 14_33_36/masks/'
     yolo_output_dir = 'screen foto/dataset 2024-04-21 14_33_36/yolo_annotations/'
 
     os.makedirs(yolo_output_dir, exist_ok=True)

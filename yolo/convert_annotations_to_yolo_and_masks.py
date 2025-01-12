@@ -19,7 +19,6 @@ class_id_map = {
     13121616: 4  # Jugular
 }
 
-# Создаем маску для выделения только объектов, относящихся к щитовидной железе
 thyroid_class_ids = {13121612}
 
 for filename in os.listdir(ann_folder):
@@ -33,7 +32,6 @@ for filename in os.listdir(ann_folder):
 
             yolo_label_path = os.path.join(yolo_labels_folder, f"{os.path.splitext(filename)[0]}.txt")
 
-            # Создаем маску (бинарное изображение)
             mask = np.zeros((height, width), dtype=np.uint8)
 
             with open(yolo_label_path, 'w') as yolo_file:
@@ -45,7 +43,6 @@ for filename in os.listdir(ann_folder):
                     if class_id in {13121610, 13121611}:
                         class_id = 13121610
 
-                    # Если объект относится к щитовидной железе, обрабатываем его
                     if class_id in class_id_map:
                         class_index = class_id_map[class_id]
 

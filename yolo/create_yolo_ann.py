@@ -5,10 +5,10 @@ import cv2
 import numpy as np
 import os
 
-IMG_DIR = "screen foto/dataset 2024-04-21 14_33_36/img"
-JSON_DIR = "screen foto/dataset 2024-04-21 14_33_36/shifted_json"
-YOLO1_DIR = "screen foto/dataset 2024-04-21 14_33_36/yolo1_ann"
-YOLO2_DIR = "screen foto/dataset 2024-04-21 14_33_36/yolo2_ann"
+IMG_DIR = "../screen foto/dataset 2024-04-21 14_33_36/img"
+JSON_DIR = "../screen foto/dataset 2024-04-21 14_33_36/shifted_json"
+YOLO1_DIR = "../screen foto/dataset 2024-04-21 14_33_36/yolo1_ann"
+YOLO2_DIR = "../screen foto/dataset 2024-04-21 14_33_36/yolo2_ann"
 
 os.makedirs(YOLO1_DIR, exist_ok=True)
 os.makedirs(YOLO2_DIR, exist_ok=True)
