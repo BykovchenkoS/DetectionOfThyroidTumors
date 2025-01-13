@@ -3,11 +3,15 @@ import os
 import numpy as np
 from PIL import Image
 
-ann_folder = 'screen foto/dataset 2024-04-21 14_33_36/shifted_json'
-ann_new_folder = 'ann_new_1/'
-masks_folder = 'screen foto/dataset 2024-04-21 14_33_36/masks/'
-images_folder = 'screen foto/dataset 2024-04-21 14_33_36/images_neuro_1/'
+# ann_folder = 'screen foto/dataset 2024-04-21 14_33_36/shifted_json'
+# ann_new_folder = 'ann_new_1/'
+# masks_folder = 'screen foto/dataset 2024-04-21 14_33_36/masks/'
+# images_folder = 'screen foto/dataset 2024-04-21 14_33_36/images_neuro_1/'
 
+ann_folder = 'dataset_coco_neuro_1/shifted_json'
+ann_new_folder = 'ann_new_2/'
+masks_folder = 'dataset_coco_neuro_1/masks/'
+images_folder = 'dataset_coco_neuro_1/images_neuro_1/'
 
 def convert_to_coco_format(annotation, image_filename):
     image_path = os.path.join(images_folder, image_filename)
@@ -103,6 +107,7 @@ def calculate_bbox_from_mask(mask_path, origin_x, origin_y):
     coco_bbox = [xmin, ymin, width, height]
 
     return coco_bbox
+
 
 def create_new_annotations():
     if not os.path.exists(ann_new_folder):
