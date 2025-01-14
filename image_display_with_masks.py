@@ -46,7 +46,8 @@ def process_image(photo_number):
         if obj.get("geometryType") != "polygon":
             obj_id = obj['id']
             class_title = obj['classTitle']
-            origin = obj.get('bitmap', {}).get('origin', [0, 0])
+            # Убираем применение смещения
+            origin = [0, 0]  # всегда считаем, что origin = [0, 0]
 
             mask_filename = f"{photo_number}_{class_title.replace(' ', '_')}_{obj_id}.png"
             mask_path = os.path.join(masks_dir, mask_filename)
@@ -59,7 +60,8 @@ def process_image(photo_number):
                 else:
                     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-                    contours = [cnt + np.array([origin[0], origin[1]]) for cnt in contours]
+                    # Без применения смещения
+                    contours = [cnt for cnt in contours]  # не смещаем контуры
 
                     color = get_class_color(class_title)
 
