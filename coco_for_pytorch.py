@@ -18,7 +18,6 @@ class CustomDataset(Dataset):
         self.masks_output_dir = masks_output_dir
         self.image_files = [f for f in os.listdir(images_dir) if f.endswith('.jpg')]
 
-        # Создаем директорию для масок, если она не существует
         if masks_output_dir and not os.path.exists(masks_output_dir):
             os.makedirs(masks_output_dir)
 
@@ -37,7 +36,7 @@ class CustomDataset(Dataset):
 
         boxes = []
         labels = []
-        masks = []  # Маски для каждого объекта
+        masks = []
         category_map = {category['id']: category['name'] for category in annotation['categories']}
 
         img_width, img_height = img.size
@@ -47,12 +46,11 @@ class CustomDataset(Dataset):
             boxes.append([xmin, ymin, xmin + width, ymin + height])
             labels.append(ann['category_id'])
 
-            # Загружаем маску, если путь указан
-            if isinstance(ann['segmentation'], str):  # Если это путь к маске
+            if isinstance(ann['segmentation'], str):
                 mask_path = ann['segmentation']
                 mask = Image.open(mask_path).convert("L")  # Маска в grayscale
                 mask = np.array(mask)
-                mask = (mask > 0).astype(np.uint8)  # Преобразуем в бинарную маску (0 или 1)
+                mask = (mask > 0).astype(np.uint8)
                 mask = Image.fromarray(mask)
                 mask = mask.resize((img_width, img_height), Image.NEAREST)  # Масштабируем маску до размера изображения
                 masks.append(np.array(mask))
@@ -116,7 +114,6 @@ def visualize(img, target, category_map):
         category_name = category_map[label.item()]
         ax.text(xmin, ymin - 5, category_name, color='r', fontsize=10, fontweight='bold')
 
-        # Получаем контуры маски и рисуем их
         mask_np = mask.numpy()
         contours, _ = cv2.findContours(mask_np, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
         for contour in contours:
@@ -157,4 +154,4 @@ def visualize_batch(images, targets, category_map):
     plt.show()
 
 
-visualize(img, target, category_map)
+# visualize(img, target, category_map)
