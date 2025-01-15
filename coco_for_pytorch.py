@@ -48,16 +48,14 @@ class CustomDataset(Dataset):
 
             if isinstance(ann['segmentation'], str):
                 mask_path = ann['segmentation']
-                mask = Image.open(mask_path).convert("L")  # Маска в grayscale
+                mask = Image.open(mask_path).convert("L")
                 mask = np.array(mask)
                 mask = (mask > 0).astype(np.uint8)
                 mask = Image.fromarray(mask)
-                mask = mask.resize((img_width, img_height), Image.NEAREST)  # Масштабируем маску до размера изображения
                 masks.append(np.array(mask))
-            elif isinstance(ann['segmentation'], list):  # Полигональная сегментация
+            elif isinstance(ann['segmentation'], list):
                 mask = np.zeros((img_height, img_width), dtype=np.uint8)
                 segmentation = np.array(ann['segmentation'])
-                # Заполняем маску для полигона
                 polygon = np.array(segmentation, dtype=np.int32)
                 mask = cv2.fillPoly(mask, [polygon], 1)
                 masks.append(mask)
@@ -88,8 +86,8 @@ class CustomDataset(Dataset):
 
 
 transform = T.Compose([T.ToTensor()])
-dataset = CustomDataset(images_dir='dataset_coco_neuro_1/train/images',
-                        annotations_dir='dataset_coco_neuro_1/train/annotations',
+dataset = CustomDataset(images_dir='dataset_coco_neuro_2/train/images',
+                        annotations_dir='dataset_coco_neuro_2/train/annotations',
                         transforms=transform)
 
 img, target, category_map = dataset[0]
@@ -154,4 +152,4 @@ def visualize_batch(images, targets, category_map):
     plt.show()
 
 
-# visualize(img, target, category_map)
+visualize(img, target, category_map)

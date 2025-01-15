@@ -4,10 +4,11 @@ import numpy as np
 import os
 import json
 
+
 def process_image(photo_number):
     json_path = f'screen foto/dataset 2024-04-21 14_33_36/shifted_json/{photo_number}.json'
     image_path = f'screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis/cropped_{photo_number}.jpg'
-    masks_dir = 'screen foto/dataset 2024-04-21 14_33_36/masks/'
+    masks_dir = 'screen foto/dataset 2024-04-21 14_33_36/old_masks/'
 
     if not os.path.exists(image_path):
         print(f"Файл изображения с номером {photo_number} не найден. Попробуйте снова.")

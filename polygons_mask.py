@@ -54,14 +54,12 @@ def load_annotations(json_file_path):
         return json.load(file)
 
 
-json_folder_path = 'dataset_coco_neuro_1/train/annotations'
-output_dir = 'new_mask'
+json_folder_path = 'dataset_coco_neuro_2/train/annotations'
+output_dir = 'dataset_coco_neuro_2/new_mask_2'
 
-# Create output directory if it doesn't exist
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-# Get all JSON files in the directory
 json_files = [f for f in os.listdir(json_folder_path) if f.endswith('.json')]
 
 try:
@@ -72,7 +70,7 @@ try:
         image_data = json_data["images"][0]
 
         image_id = image_data["id"]
-        image_path = f"dataset_coco_neuro_1/train/images/{image_id}.jpg"
+        image_path = f"dataset_coco_neuro_2/train/images/{image_id}.jpg"
 
         # Process all annotations in the current JSON file
         for i, annotation in enumerate(annotations):

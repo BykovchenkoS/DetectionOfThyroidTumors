@@ -1,15 +1,14 @@
 from PIL import Image
 import numpy as np
 
-mask = Image.open('screen foto/dataset 2024-04-21 14_33_36/masks/2_Carotis_1556365529.png').convert('1')  # '1' для бинарного изображения
+mask = Image.open('dataset_coco_neuro_2/masks/100_Node_1554990432.png').convert('1')
 mask_array = np.array(mask)
 
 origin_x = 12
-origin_y = 145
+origin_y = 13
 
 object_pixels = np.where(mask_array == 1)
 
-# Нахождение минимальных и максимальных координат с учетом origin
 xmin = np.min(object_pixels[1]) + origin_x
 xmax = np.max(object_pixels[1]) + origin_x
 ymin = np.min(object_pixels[0]) + origin_y
