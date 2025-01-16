@@ -6,7 +6,7 @@ import cv2
 
 ann_folder = 'dataset_coco_neuro_2/shifted_json'
 ann_new_folder = 'ann_new_2_node/'
-masks_folder = 'dataset_coco_neuro_2/masks/'
+masks_folder = 'screen foto/dataset 2024-04-21 14_33_36/old_masks/'
 images_folder = 'dataset_coco_neuro_2/images_neuro_2/'
 
 

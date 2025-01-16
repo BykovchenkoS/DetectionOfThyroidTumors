@@ -36,23 +36,27 @@ def resize_mask_from_annotations(image_path, mask_path, annotation, image_data, 
     for i, mask in enumerate(masks):
         mask_resized = cv2.resize(mask, (int(width), int(height)), interpolation=cv2.INTER_NEAREST)
 
-        # Проверка и вывод сообщения в случае несоответствия размеров
-        if mask_resized.shape[0] > height or mask_resized.shape[1] > width:
-            print(f"Error with mask {mask_path}: "
-                  f"Mask size {mask_resized.shape} does not fit in bounding box of size ({height}, {width})")
-
         # Обрезаем маску, если она выходит за пределы области
         mask_resized = mask_resized[:min(height, mask_resized.shape[0]), :min(width, mask_resized.shape[1])]
 
+        # Создаем пустую маску с размерами изображения
         new_mask = np.zeros((img_height, img_width), dtype=np.uint8)
-        new_mask[int(y):int(y) + min(height, mask_resized.shape[0]),
-        int(x):int(x) + min(width, mask_resized.shape[1])] = mask_resized
+
+        # Обрезаем маску, если она выходит за пределы bounding box
+        new_height = min(height, mask_resized.shape[0])
+        new_width = min(width, mask_resized.shape[1])
+
+        if new_height + y > img_height:
+            new_height = img_height - y
+        if new_width + x > img_width:
+            new_width = img_width - x
+
+        new_mask[int(y):int(y) + new_height, int(x):int(x) + new_width] = mask_resized[:new_height, :new_width]
 
         if isinstance(mask_path, str):
             output_mask_filename = f"{output_dir}/{os.path.basename(mask_path)}"
             cv2.imwrite(output_mask_filename, new_mask)
             print(f"New mask saved at {output_mask_filename}")
-
 
 def decode_rle(rle, height, width):
     mask = np.zeros((height, width), dtype=np.uint8)
@@ -63,35 +67,33 @@ def decode_rle(rle, height, width):
         mask.flat[start:start + length] = 255
     return mask
 
-
 def load_annotations(json_file_path):
     with open(json_file_path, 'r') as file:
         return json.load(file)
 
 
-json_folder_path = 'dataset_coco_neuro_2/val/annotations'
-output_dir = 'dataset_coco_neuro_2/new_mask_3'
+# Укажите конкретный путь к JSON файлу
+json_file_path = 'dataset_coco_neuro_2/train/annotations/55.json'
+
+# Папка для сохранения новых масок
+output_dir = 'dataset_coco_neuro_2/maskssss'
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-json_files = [f for f in os.listdir(json_folder_path) if f.endswith('.json')]
-
 failed_files = []
 
 try:
-    for json_file in json_files:
-        json_file_path = os.path.join(json_folder_path, json_file)
-        json_data = load_annotations(json_file_path)
-        annotations = json_data["annotations"]
-        image_data = json_data["images"][0]
+    json_data = load_annotations(json_file_path)
+    annotations = json_data["annotations"]
+    image_data = json_data["images"][0]
 
-        image_id = image_data["id"]
-        image_path = f"dataset_coco_neuro_2/val/images/{image_id}.jpg"
+    image_id = image_data["id"]
+    image_path = f"dataset_coco_neuro_2/train/images/{image_id}.jpg"
 
-        for i, annotation in enumerate(annotations):
-            mask_path = annotation["segmentation"]
-            resize_mask_from_annotations(image_path, mask_path, annotation, image_data, output_dir, failed_files)
+    for i, annotation in enumerate(annotations):
+        mask_path = annotation["segmentation"]
+        resize_mask_from_annotations(image_path, mask_path, annotation, image_data, output_dir, failed_files)
 
 except FileNotFoundError as e:
     print(e)

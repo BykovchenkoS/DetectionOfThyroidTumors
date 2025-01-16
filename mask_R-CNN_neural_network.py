@@ -31,21 +31,10 @@ model.to(device)
 
 transform = T.Compose([T.ToTensor()])
 
-
-class FilteredCustomDataset(CustomDataset):
-    def __getitem__(self, idx):
-        data = super().__getitem__(idx)
-        image, target = data[:2]
-        if len(target["boxes"]) == 0:
-            return None
-        return image, target
-
-
-dataset = FilteredCustomDataset(images_dir='dataset_coco_neuro_2/train/images',
-                                annotations_dir='dataset_coco_neuro_2/train/annotations',
-                                transforms=transform)
-
-data_loader = DataLoader(dataset, batch_size=16, shuffle=True, collate_fn=lambda x: tuple(zip(*[i for i in x if i])))
+dataset = CustomDataset(images_dir='dataset_coco_neuro_2/train/images',
+                        annotations_dir='dataset_coco_neuro_2/train/annotations',
+                        transforms=transform)
+data_loader = DataLoader(dataset, batch_size=16, shuffle=True, collate_fn=lambda x: tuple(zip(*x)))
 
 params = [p for p in model.parameters() if p.requires_grad]
 optimizer = optim.SGD(params, lr=0.005, momentum=0.9, weight_decay=0.0005)
@@ -61,7 +50,7 @@ with open('maskRCNN_result_node.csv', mode='w', newline='') as file:
         model.train()
         epoch_loss = 0
         start_time = time.time()
-        for images, targets in tqdm(data_loader, desc=f"Epoch {epoch + 1}/{num_epochs}", unit='batch'):
+        for images, targets, _ in tqdm(data_loader, desc=f"Epoch {epoch + 1}/{num_epochs}", unit='batch'):
             images = [image.to(device) for image in images]
             targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
 

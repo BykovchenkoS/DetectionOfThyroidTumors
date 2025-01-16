@@ -1,9 +1,9 @@
 import os
 import shutil
 
-jpg_folder = 'dataset_coco_neuro_2/train/images'
-json_folder = 'ann_new_2'
-destination_folder = 'dataset_coco_neuro_2/train/annotations'
+jpg_folder = 'dataset_coco_neuro_2/val/images'
+json_folder = 'ann_new_2_node'
+destination_folder = 'dataset_coco_neuro_2/val/annotations'
 
 jpg_files = {os.path.splitext(file)[0] for file in os.listdir(jpg_folder) if file.endswith('.jpg')}
 txt_files = {os.path.splitext(file)[0] for file in os.listdir(json_folder) if file.endswith('.json')}
