@@ -66,12 +66,12 @@ model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCN
 in_features_mask = model.roi_heads.mask_predictor.conv5_mask.in_channels
 model.roi_heads.mask_predictor = torchvision.models.detection.mask_rcnn.MaskRCNNPredictor(in_features_mask, 256, num_classes)
 
-model.load_state_dict(torch.load('mask_rcnn_model_1.pth', weights_only=True))
+model.load_state_dict(torch.load('mask_rcnn_model_screen.pth', weights_only=True))
 model.eval()
 
 transform = T.Compose([T.ToTensor()])
-input_folder = 'screen foto/dataset 2024-04-21 14_33_36/img/'
-output_folder = 'predict_mask_rcnn_screen/'
+input_folder = '../dataset_coco_neuro_1/val/images/'
+output_folder = '../predict_mask_rcnn_screen_val/'
 
 os.makedirs(output_folder, exist_ok=True)
 

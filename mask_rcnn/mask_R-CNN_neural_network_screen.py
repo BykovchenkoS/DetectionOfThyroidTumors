@@ -12,34 +12,34 @@ import time
 import logging
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', handlers=[
-    logging.FileHandler("training_node.log"),
+    logging.FileHandler("training_screen.log"),
     logging.StreamHandler()
 ])
 
 model = maskrcnn_resnet50_fpn(weights=MaskRCNN_ResNet50_FPN_Weights.COCO_V1)
 
 num_classes = len(category_map) + 1
+
 in_features = model.roi_heads.box_predictor.cls_score.in_features
 model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(in_features, num_classes)
 
 in_features_mask = model.roi_heads.mask_predictor.conv5_mask.in_channels
-model.roi_heads.mask_predictor = torchvision.models.detection.mask_rcnn.MaskRCNNPredictor(in_features_mask, 256,
-                                                                                          num_classes)
+model.roi_heads.mask_predictor = torchvision.models.detection.mask_rcnn.MaskRCNNPredictor(in_features_mask, 256, num_classes)
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 model.to(device)
 
 transform = T.Compose([T.ToTensor()])
 
-dataset = CustomDataset(images_dir='dataset_coco_neuro_2/train/images',
-                        annotations_dir='dataset_coco_neuro_2/train/annotations',
+dataset = CustomDataset(images_dir='../dataset_coco_neuro_1/train/images',
+                        annotations_dir='../dataset_coco_neuro_1/train/annotations',
                         transforms=transform)
 data_loader = DataLoader(dataset, batch_size=16, shuffle=True, collate_fn=lambda x: tuple(zip(*x)))
 
 params = [p for p in model.parameters() if p.requires_grad]
 optimizer = optim.SGD(params, lr=0.005, momentum=0.9, weight_decay=0.0005)
 
-with open('maskRCNN_result_node.csv', mode='w', newline='') as file:
+with open('maskRCNN_result_screen.csv', mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['Epoch', 'Time', 'Train/box_loss', 'Train/cls_loss', 'Train/dfl_loss',
                      'Metrics/precision(B)', 'Metrics/recall(B)', 'Metrics/mAP50(B)', 'Metrics/mAP50-95(B)',
@@ -57,6 +57,7 @@ with open('maskRCNN_result_node.csv', mode='w', newline='') as file:
             optimizer.zero_grad()
 
             loss_dict = model(images, targets)
+
             box_loss = loss_dict['loss_box_reg'].item()
             cls_loss = loss_dict['loss_classifier'].item()
             dfl_loss = loss_dict['loss_objectness'].item()
@@ -78,6 +79,7 @@ with open('maskRCNN_result_node.csv', mode='w', newline='') as file:
         log_message = (f"Epoch {epoch + 1}/{num_epochs} - Loss: {epoch_loss / len(data_loader)} - "
                        f"Box Loss: {box_loss} - Class Loss: {cls_loss} - Objectness Loss: {dfl_loss}")
         logging.info(log_message)
+
         print(log_message)
 
-torch.save(model.state_dict(), 'mask_rcnn_model_node.pth')
+torch.save(model.state_dict(), 'mask_rcnn_model_screen.pth')
