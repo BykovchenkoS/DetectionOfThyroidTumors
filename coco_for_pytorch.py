@@ -86,8 +86,8 @@ class CustomDataset(Dataset):
 
 
 transform = T.Compose([T.ToTensor()])
-dataset = CustomDataset(images_dir='dataset_coco_neuro_1/train/images',
-                        annotations_dir='dataset_coco_neuro_1/train/annotations',
+dataset = CustomDataset(images_dir='dataset_coco_neuro_2/train/images',
+                        annotations_dir='dataset_coco_neuro_2/train/annotations',
                         transforms=transform)
 
 img, target, category_map = dataset[0]
