@@ -78,6 +78,8 @@ class CustomDataset(Dataset):
             "masks": masks,
             "image_id": torch.tensor([index]),
         }
+        assert min(labels) >= 1, "Labels should start from 1"
+        assert max(labels) <= len(category_map), "Labels exceed the number of classes"
 
         if self.transforms:
             img = self.transforms(img)
@@ -86,8 +88,8 @@ class CustomDataset(Dataset):
 
 
 transform = T.Compose([T.ToTensor()])
-dataset = CustomDataset(images_dir='dataset_coco_neuro_2/train/images',
-                        annotations_dir='dataset_coco_neuro_2/train/annotations',
+dataset = CustomDataset(images_dir='dataset_for_search_1/train/images',
+                        annotations_dir='dataset_for_search_1/train/annotations',
                         transforms=transform)
 
 img, target, category_map = dataset[0]
