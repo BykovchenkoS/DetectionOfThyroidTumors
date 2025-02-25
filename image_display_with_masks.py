@@ -4,11 +4,10 @@ import numpy as np
 import os
 import json
 
-
 def process_image(photo_number):
     json_path = f'screen foto/dataset 2024-04-21 14_33_36/clear_ann/{photo_number}.json'
     image_path = f'screen foto/dataset 2024-04-21 14_33_36/img/{photo_number}.jpg'
-    masks_dir = 'screen foto/dataset 2024-04-21 14_33_36/masks/'
+    masks_dir = 'screen foto/dataset 2024-04-21 14_33_36/old_masks/'
 
     if not os.path.exists(image_path):
         print(f"Файл изображения с номером {photo_number} не найден. Попробуйте снова.")
@@ -46,8 +45,9 @@ def process_image(photo_number):
         if obj.get("geometryType") != "polygon":
             obj_id = obj['id']
             class_title = obj['classTitle']
-            # Убираем применение смещения
-            origin = [0, 0]  # всегда считаем, что origin = [0, 0]
+
+            # origin = [0, 0]  # всегда считаем, что origin = [0, 0]
+            origin = obj.get('bitmap', {}).get('origin', [0, 0])
 
             mask_filename = f"{photo_number}_{class_title.replace(' ', '_')}_{obj_id}.png"
             mask_path = os.path.join(masks_dir, mask_filename)
@@ -60,8 +60,8 @@ def process_image(photo_number):
                 else:
                     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-                    # Без применения смещения
-                    contours = [cnt for cnt in contours]  # не смещаем контуры
+                    # contours = [cnt for cnt in contours]  # не смещаем контуры
+                    contours = [cnt + np.array([origin[0], origin[1]]) for cnt in contours]
 
                     color = get_class_color(class_title)
 
