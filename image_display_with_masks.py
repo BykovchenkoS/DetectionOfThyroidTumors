@@ -4,10 +4,11 @@ import numpy as np
 import os
 import json
 
+
 def process_image(photo_number):
-    json_path = f'screen foto/dataset 2024-04-21 14_33_36/clear_ann/{photo_number}.json'
-    image_path = f'screen foto/dataset 2024-04-21 14_33_36/img/{photo_number}.jpg'
-    masks_dir = 'screen foto/dataset 2024-04-21 14_33_36/old_masks/'
+    json_path = f'dataset_coco_neuro_1/val/annotations/{photo_number}.json'
+    image_path = f'dataset_coco_neuro_1/val/images/{photo_number}.jpg'
+    masks_dir = 'dataset_coco_neuro_1/masks/'
 
     if not os.path.exists(image_path):
         print(f"Файл изображения с номером {photo_number} не найден. Попробуйте снова.")
@@ -22,53 +23,58 @@ def process_image(photo_number):
     with open(json_path, 'r') as file:
         data = json.load(file)
 
+    if 'annotations' not in data or 'categories' not in data:
+        print(f"Ошибка: В файле JSON с номером {photo_number} отсутствуют ключи 'annotations' или 'categories'.")
+        return False
+
+    category_map = {cat['id']: cat['name'] for cat in data['categories']}
+
     mask_files = [f for f in os.listdir(masks_dir) if f.startswith(f"{photo_number}_")]
 
     def get_class_color(class_name):
         color_map = {
-            "Carotis": (0, 165, 255),       # orange
-            "Node": (0, 255, 255),          # yellow
-            "Thyroid tissue": (0, 0, 255)   # red
+            "Carotis": (0, 165, 255),  # orange
+            "Node": (0, 255, 255),  # yellow
+            "Thyroid tissue": (0, 0, 255)  # red
         }
         return color_map.get(class_name, (255, 255, 255))
 
     polygon_mask = np.zeros(image.shape[:2], dtype=np.uint8)
 
-    for obj in data['objects']:
-        if obj.get("geometryType") == "polygon":
-            exterior_points = np.array(obj['points']['exterior'], dtype=np.int32)
-            cv2.fillPoly(polygon_mask, [exterior_points], 255)
+    for annotation in data['annotations']:
+        category_id = annotation['category_id']
+        class_title = category_map.get(category_id, "Unknown")
 
-    image_with_polygon = cv2.bitwise_and(image, image, mask=polygon_mask)
+        mask_filename = os.path.basename(annotation['segmentation'])
+        mask_path = os.path.join(masks_dir, mask_filename)
 
-    for obj in data['objects']:
-        if obj.get("geometryType") != "polygon":
-            obj_id = obj['id']
-            class_title = obj['classTitle']
+        if not os.path.exists(mask_path):
+            print(f"Ошибка: Маска {mask_path} не найдена.")
+            continue
 
-            # origin = [0, 0]  # всегда считаем, что origin = [0, 0]
-            origin = obj.get('bitmap', {}).get('origin', [0, 0])
+        mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)
+        if mask is None:
+            print(f"Ошибка: Не удалось загрузить маску {mask_path}.")
+            continue
 
-            mask_filename = f"{photo_number}_{class_title.replace(' ', '_')}_{obj_id}.png"
-            mask_path = os.path.join(masks_dir, mask_filename)
+        if np.count_nonzero(mask) == 0:
+            print(f"Ошибка: Маска {mask_path} пустая.")
+            continue
 
-            if mask_filename in mask_files:
-                mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)
+        if len(mask.shape) > 2:
+            mask = cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY)
 
-                if mask is None or np.count_nonzero(mask) == 0:
-                    print(f"Warning: Mask for {class_title} with ID {obj_id} is empty or missing.")
-                else:
-                    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        if len(contours) == 0:
+            print(f"Ошибка: Контуры не найдены для маски {mask_path}.")
+            continue
 
-                    # contours = [cnt for cnt in contours]  # не смещаем контуры
-                    contours = [cnt + np.array([origin[0], origin[1]]) for cnt in contours]
+        color = get_class_color(class_title)
+        cv2.drawContours(image, contours, -1, color, thickness=2)
 
-                    color = get_class_color(class_title)
-
-                    cv2.drawContours(image_with_polygon, contours, -1, color, 2)
-
-    cv2.imshow("Annotated Image with Masks and Polygon Cropped", image_with_polygon)
+    cv2.imshow("Annotated Image with Masks", image)
     return True
+
 
 while True:
     photo_number = input("Введите номер фото (или 'exit' для выхода): ").strip()
