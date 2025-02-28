@@ -84,17 +84,17 @@ class CustomDataset(Dataset):
         if self.transforms:
             img = self.transforms(img)
 
-        return img, target, category_map
+        return img, target
 
 
-transform = T.Compose([T.ToTensor()])
-dataset = CustomDataset(images_dir='dataset_for_search_1/train/images',
-                        annotations_dir='dataset_for_search_1/train/annotations',
-                        transforms=transform)
-
-img, target, category_map = dataset[0]
-print("Image shape:", img.shape)
-print("Annotations:", target)
+# transform = T.Compose([T.ToTensor()])
+# dataset = CustomDataset(images_dir='dataset_for_search_1/train/images',
+#                         annotations_dir='dataset_for_search_1/train/annotations',
+#                         transforms=transform)
+#
+# img, target = dataset[0]
+# print("Image shape:", img.shape)
+# print("Annotations:", target)
 
 
 def visualize(img, target, category_map):
