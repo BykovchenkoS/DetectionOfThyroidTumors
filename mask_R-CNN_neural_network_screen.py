@@ -26,7 +26,7 @@ from coco_for_pytorch import CustomDataset
 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', handlers=[
-    logging.FileHandler("training_screen.log"),
+    logging.FileHandler("training_screen_mask_rcnn.log"),
     logging.StreamHandler()
 ])
 
