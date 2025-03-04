@@ -37,7 +37,7 @@ logging.basicConfig(
 
 
 def calculate_metrics(model, data_loader, device):
-    num_classes = 2
+    num_classes = 3
 
     metric_map = MeanAveragePrecision(box_format="xyxy", iou_type="bbox")
 
@@ -97,7 +97,7 @@ def calculate_metrics(model, data_loader, device):
 
 
 def objective(trial):
-    batch_size = trial.suggest_categorical("batch_size", [8, 16, 32])
+    batch_size = trial.suggest_categorical("batch_size", [4, 8, 16])
     learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e-3, log=True)
     momentum = trial.suggest_float("momentum", 0.8, 0.99)
     weight_decay = trial.suggest_float("weight_decay", 1e-5, 1e-3, log=True)
@@ -214,5 +214,5 @@ def objective(trial):
 
 
 study = optuna.create_study(direction="maximize")
-study.optimize(objective, n_trials=15)
+study.optimize(objective, n_trials=7)
 
