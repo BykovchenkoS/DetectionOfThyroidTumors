@@ -34,7 +34,7 @@ def shift_category_ids_in_directory(input_dir, output_dir):
             print(f"Обновленные аннотации сохранены в файл: {output_file}")
 
 
-input_dir = 'dataset_coco_neuro_2/train/annotations'
+input_dir = '../dataset_coco_neuro_2/train/annotations'
 output_dir = 'updated_annotations'
 
 shift_category_ids_in_directory(input_dir, output_dir)

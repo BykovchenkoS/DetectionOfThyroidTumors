@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import os
 
-input_dir = "dataset_for_search_1/old_masks"
-output_dir = "dataset_for_search_1/masks"
+input_dir = "../dataset_for_search_1/old_masks"
+output_dir = "../dataset_for_search_1/masks"
 
 os.makedirs(output_dir, exist_ok=True)
 

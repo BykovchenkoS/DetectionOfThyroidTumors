@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 
-mask = Image.open('dataset_coco_neuro_2/masks/100_Node_1554990432.png').convert('1')
+mask = Image.open('../dataset_coco_neuro_2/masks/100_Node_1554990432.png').convert('1')
 mask_array = np.array(mask)
 
 origin_x = 12

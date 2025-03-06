@@ -38,7 +38,7 @@ def remove_category(input_dir, output_dir, category_to_remove_id):
             print(f"Файл сохранён: {output_file}\n")
 
 
-input_dir = "dataset_coco_neuro_1/val/annotations"
+input_dir = "../dataset_coco_neuro_1/val/annotations"
 output_dir = "updated_annotations"
 category_to_remove_id = 0
 

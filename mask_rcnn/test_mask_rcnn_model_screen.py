@@ -1,8 +1,8 @@
 import os
 import torch
 import torchvision
-from torchvision.models.detection import maskrcnn_resnet50_fpn
-from torchvision.models.detection import MaskRCNN_ResNet50_FPN_Weights
+from torchvision.models.detection import maskrcnn_resnet50_fpn_v2
+from torchvision.models.detection import MaskRCNN_ResNet50_FPN_V2_Weights
 import torchvision.transforms as T
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -21,7 +21,6 @@ def save_image_with_predictions(image, predictions, class_names, output_path, th
     masks = masks[keep]
 
     color_map = {
-        'sagital_longitudinal': 'blue',
         'Thyroid tissue': 'red',
         'Carotis': 'green',
         'background': 'yellow'
@@ -40,9 +39,7 @@ def save_image_with_predictions(image, predictions, class_names, output_path, th
         mask = mask[0]
         image_with_mask = np.array(image).astype(np.float32)
 
-        if class_name == 'sagital_longitudinal':
-            image_with_mask[mask > 0.5] = [0, 0, 255]  # синий
-        elif class_name == 'Thyroid tissue':
+        if class_name == 'Thyroid tissue':
             image_with_mask[mask > 0.5] = [255, 0, 0]  # красный
         elif class_name == 'Carotis':
             image_with_mask[mask > 0.5] = [0, 255, 0]  # зеленый
@@ -57,9 +54,9 @@ def save_image_with_predictions(image, predictions, class_names, output_path, th
     plt.close()
 
 
-class_names = ['sagital_longitudinal', 'Thyroid tissue', 'Carotis', 'background']
+class_names = ['background', 'Thyroid tissue', 'Carotis']
 
-model = maskrcnn_resnet50_fpn(weights=MaskRCNN_ResNet50_FPN_Weights.DEFAULT)
+model = maskrcnn_resnet50_fpn_v2(weights=MaskRCNN_ResNet50_FPN_V2_Weights.DEFAULT)
 num_classes = len(class_names)
 in_features = model.roi_heads.box_predictor.cls_score.in_features
 model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(in_features, num_classes)
@@ -71,7 +68,7 @@ model.eval()
 
 transform = T.Compose([T.ToTensor()])
 input_folder = '../dataset_coco_neuro_1/val/images/'
-output_folder = '../predict_mask_rcnn_screen_val/'
+output_folder = '../predict_mask_rcnn_screen_val_NEW/'
 
 os.makedirs(output_folder, exist_ok=True)
 

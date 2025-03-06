@@ -24,9 +24,9 @@ def convert_int64_to_int(obj):
     else:
         return obj
 
-images_path = "screen foto/dataset 2024-04-21 14_33_36/img"
-json_path = "screen foto/dataset 2024-04-21 14_33_36/clear_ann"
-output_json_path = "screen foto/dataset 2024-04-21 14_33_36/shifted_json"
+images_path = "../screen foto/dataset 2024-04-21 14_33_36/img"
+json_path = "../screen foto/dataset 2024-04-21 14_33_36/clear_ann"
+output_json_path = "../screen foto/dataset 2024-04-21 14_33_36/shifted_json"
 
 os.makedirs(output_json_path, exist_ok=True)
 
@@ -46,10 +46,10 @@ for image_file in image_files:
                 if class_title in ["Thyroid tissue", "Carotis"] and "bitmap" in obj:
                     origin = obj["bitmap"].get("origin", [0, 0])
                     mask_pattern = f"{re.escape(image_name)}_{re.escape(class_title.replace(' ', '_'))}.*\.png"
-                    matching_masks = [mask for mask in os.listdir("screen foto/dataset 2024-04-21 14_33_36/masks") if re.match(mask_pattern, mask)]
+                    matching_masks = [mask for mask in os.listdir("../screen foto/dataset 2024-04-21 14_33_36/masks") if re.match(mask_pattern, mask)]
 
                     if matching_masks:
-                        mask_path = os.path.join("screen foto/dataset 2024-04-21 14_33_36/masks", matching_masks[0])
+                        mask_path = os.path.join("../screen foto/dataset 2024-04-21 14_33_36/masks", matching_masks[0])
                         regions.append({"origin": origin, "mask_path": mask_path})
 
             if not regions:

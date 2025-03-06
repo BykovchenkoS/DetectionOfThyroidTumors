@@ -4,10 +4,10 @@ import numpy as np
 import json
 import re
 
-images_path = "screen foto/dataset 2024-04-21 14_33_36/img"
-masks_path = "screen foto/dataset 2024-04-21 14_33_36/masks"
-json_path = "screen foto/dataset 2024-04-21 14_33_36/clear_ann"
-output_path = "screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis"
+images_path = "../screen foto/dataset 2024-04-21 14_33_36/img"
+masks_path = "../screen foto/dataset 2024-04-21 14_33_36/masks"
+json_path = "../screen foto/dataset 2024-04-21 14_33_36/clear_ann"
+output_path = "../screen foto/dataset 2024-04-21 14_33_36/img_masks_thyroid_carotis"
 
 os.makedirs(output_path, exist_ok=True)
 

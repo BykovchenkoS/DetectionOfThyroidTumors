@@ -2,7 +2,7 @@ import os
 import json
 from PIL import Image
 
-input_dir = 'dataset_coco_neuro_2/val/annotations/'
+input_dir = '../dataset_coco_neuro_2/val/annotations/'
 output_dir = 'dataset_coco_neuro_2/val/annotations_/'
 
 os.makedirs(output_dir, exist_ok=True)

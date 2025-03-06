@@ -106,14 +106,14 @@ model.to(device)
 transform = torchvision.transforms.Compose([torchvision.transforms.ToTensor()])
 
 train_dataset = CustomDataset(
-    images_dir='dataset_coco_neuro_1/train/images',
-    annotations_dir='dataset_coco_neuro_1/train/annotations',
+    images_dir='../dataset_coco_neuro_1/train/images',
+    annotations_dir='../dataset_coco_neuro_1/train/annotations',
     transforms=transform
 )
 
 val_dataset = CustomDataset(
-    images_dir='dataset_coco_neuro_1/val/images',
-    annotations_dir='dataset_coco_neuro_1/val/annotations',
+    images_dir='../dataset_coco_neuro_1/val/images',
+    annotations_dir='../dataset_coco_neuro_1/val/annotations',
     transforms=torchvision.transforms.ToTensor()
 )
 

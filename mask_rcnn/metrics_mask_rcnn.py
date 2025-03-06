@@ -328,9 +328,9 @@ if __name__ == "__main__":
     num_classes = len(category_map) + 1
 
     model_path = 'mask_rcnn_model_screen.pth'
-    images_dir = 'dataset_coco_neuro_1/val/images'
-    annotations_dir = 'dataset_coco_neuro_1/val/annotations'
-    masks_dir = 'dataset_coco_neuro_1/masks'
+    images_dir = '../dataset_coco_neuro_1/val/images'
+    annotations_dir = '../dataset_coco_neuro_1/val/annotations'
+    masks_dir = '../dataset_coco_neuro_1/masks'
 
     model = maskrcnn_resnet50_fpn(weights=None)
     in_features = model.roi_heads.box_predictor.cls_score.in_features
@@ -354,7 +354,7 @@ if __name__ == "__main__":
         print(f"False Positives: {metrics['fp']}")
         print(f"False Negatives: {metrics['fn']}")
 
-    save_dir = "mask_rcnn/plots"
+    save_dir = "plots"
 
     precisions = []
     recalls = []
