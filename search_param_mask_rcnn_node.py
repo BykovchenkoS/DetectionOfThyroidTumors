@@ -97,7 +97,7 @@ def calculate_metrics(model, data_loader, device):
 
 
 def objective(trial):
-    batch_size = trial.suggest_categorical("batch_size", [8, 16, 32])
+    batch_size = trial.suggest_categorical("batch_size", [4, 8, 16])
     learning_rate = trial.suggest_float("learning_rate", 1e-5, 1e-3, log=True)
     momentum = trial.suggest_float("momentum", 0.8, 0.99)
     weight_decay = trial.suggest_float("weight_decay", 1e-5, 1e-3, log=True)
