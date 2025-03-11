@@ -311,3 +311,7 @@ if __name__ == '__main__':
     )
 
     trainer.fit(model)
+
+    model_save_path = "detr_model_screen_v2.pth"
+    torch.save(model.model.state_dict(), model_save_path)
+    logging.info(f"Model saved to {model_save_path}")
