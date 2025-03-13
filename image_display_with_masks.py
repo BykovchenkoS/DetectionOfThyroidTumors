@@ -6,9 +6,9 @@ import json
 
 
 def process_image(photo_number):
-    json_path = f'dataset_coco_neuro_1/val/annotations/{photo_number}.json'
-    image_path = f'dataset_coco_neuro_1/val/images/{photo_number}.jpg'
-    masks_dir = 'dataset_coco_neuro_1/masks/'
+    json_path = f'dataset_coco_neuro_2/val/annotations/{photo_number}.json'
+    image_path = f'dataset_coco_neuro_2/val/images/{photo_number}.jpg'
+    masks_dir = 'dataset_coco_neuro_2/masks/'
 
     if not os.path.exists(image_path):
         print(f"Файл изображения с номером {photo_number} не найден. Попробуйте снова.")
