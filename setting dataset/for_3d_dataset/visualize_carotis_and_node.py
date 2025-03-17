@@ -2,6 +2,7 @@ import cv2
 import json
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def visualize_annotations(image_path, annotation_path):
@@ -24,20 +25,31 @@ def visualize_annotations(image_path, annotation_path):
         elif category_id == 2:  # Carotis
             color = (0, 255, 0)  # Зеленый
         else:
-            color = (0, 0, 255)  # Синий
+            color = (128, 0, 128)  # Фиолетовый
 
         x_min, y_min, width, height = map(int, bbox)
         cv2.rectangle(image, (x_min, y_min), (x_min + width, y_min + height), color, 2)
 
+        if "segmentation" in ann and isinstance(ann["segmentation"], str):
+            mask_path = ann["segmentation"]
+            if os.path.exists(mask_path):
+                mask = cv2.imread(mask_path, cv2.IMREAD_GRAYSCALE)
+
+                mask_color = np.zeros_like(image)
+                mask_color[mask > 0] = [128, 0, 128]
+
+                alpha = 0.5
+                image = cv2.addWeighted(image, 1, mask_color, alpha, 0)
+
     plt.figure(figsize=(10, 10))
     plt.imshow(image)
-    plt.title("Visualization of Bounding Boxes")
+    plt.title("Visualization of Bounding Boxes and Masks")
     plt.axis("off")
     plt.show()
 
 
-input_annotation_dir_1 = "dataset_node/ann_fixed"
-input_image_dir_1 = "dataset_node/img"
+input_annotation_dir_1 = "../../dataset_coco_neuro_3/ann"
+input_image_dir_1 = "../../dataset_coco_neuro_3/images_neuro_3"
 
 while True:
     annotation_number = input("Введите номер аннотации (или 'exit' для выхода): ").strip()
