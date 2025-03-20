@@ -24,8 +24,8 @@ def determine_echogenicity(image_path, mask_path):
 
 
 def process_image_by_number(image_number):
-    images_dir = 'dataset_coco_neuro_3/images_neuro_3'
-    masks_dir = 'dataset_coco_neuro_3/masks'
+    images_dir = '../dataset_coco_neuro_3/images_neuro_3'
+    masks_dir = '../dataset_coco_neuro_3/masks'
 
     image_path = os.path.join(images_dir, f"{image_number}.jpg")
     mask_filename = [f for f in os.listdir(masks_dir) if f.startswith(f"{image_number}_")]
