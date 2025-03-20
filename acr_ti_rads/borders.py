@@ -214,9 +214,9 @@ def process_image_by_number(image_number):
 
 
 while True:
-    user_input = input("Введите номер фото (или 'q' для выхода): ")
+    user_input = input("Введите номер фото (или 'exit' для выхода): ")
 
-    if user_input.lower() == 'q':
+    if user_input.lower() == 'exit':
         print("Программа завершена.")
         break
 
