@@ -1,15 +1,29 @@
 import os
 import torch
 import torchvision
-from torchvision.models.detection import maskrcnn_resnet50_fpn_v2
-from torchvision.models.detection import MaskRCNN_ResNet50_FPN_V2_Weights
+from torchvision.models.detection import maskrcnn_resnet50_fpn_v2, MaskRCNN_ResNet50_FPN_V2_Weights
 import torchvision.transforms as T
 from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
+import json
+from scipy.ndimage import zoom
 
 
-def save_image_with_predictions(image, predictions, class_names, output_path, threshold=0.5):
+def save_image_with_predictions(image, predictions, class_names, output_path,
+                                threshold=0.5, ground_truth=None, true_mask=None):
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(2 * 528 / 100, 528 / 100))
+    fig.subplots_adjust(left=0.05, right=0.95, bottom=0.05, top=0.95, wspace=0.1)
+
+    plot_predictions(ax1, image, predictions, class_names, threshold, title="Predictions")
+    plot_ground_truth(ax2, image, ground_truth, class_names, title="Ground Truth", true_mask=true_mask)
+
+    plt.tight_layout()
+    plt.savefig(output_path, bbox_inches='tight', pad_inches=0.5, dpi=100)
+    plt.close()
+
+
+def plot_predictions(ax, image, predictions, class_names, threshold, title):
     boxes = predictions[0]['boxes'].cpu().detach().numpy()
     labels = predictions[0]['labels'].cpu().detach().numpy()
     scores = predictions[0]['scores'].cpu().detach().numpy()
@@ -21,37 +35,146 @@ def save_image_with_predictions(image, predictions, class_names, output_path, th
     masks = masks[keep]
 
     color_map = {
-        'Thyroid tissue': 'red',
-        'Carotis': 'green',
-        'background': 'yellow'
+        'Thyroid tissue': [0.4, 0, 0.4],  # фиолетовый
+        'Carotis': [1, 0.18, 1],          # розовый
+        'background': [1, 0.65, 0]       # оранжевый
     }
 
-    fig, ax = plt.subplots(1, figsize=(12, 9))
     ax.imshow(image)
+    ax.set_title(title)
+
     for box, label, mask in zip(boxes, labels, masks):
         class_name = class_names[label]
-        color = color_map[class_name]
+        color = color_map.get(class_name, 'black')
 
         ax.add_patch(
-            plt.Rectangle((box[0], box[1]), box[2] - box[0], box[3] - box[1], fill=False, edgecolor=color, linewidth=2))
-        ax.text(box[0], box[1] - 10, class_name, color=color, fontsize=12, backgroundcolor='white')
+            plt.Rectangle((box[0], box[1]), box[2] - box[0], box[3] - box[1],
+                          fill=False, edgecolor=color, linewidth=2)
+        )
+        ax.text(box[0], box[1] - 10, class_name, color=color,
+                fontsize=12, backgroundcolor='white')
 
         mask = mask[0]
-        image_with_mask = np.array(image).astype(np.float32)
+        h, w = image.size[1], image.size[0]
 
-        if class_name == 'Thyroid tissue':
-            image_with_mask[mask > 0.5] = [255, 0, 0]  # красный
-        elif class_name == 'Carotis':
-            image_with_mask[mask > 0.5] = [0, 255, 0]  # зеленый
-        elif class_name == 'background':
-            image_with_mask[mask > 0.5] = [255, 255, 0]  # желтый
+        x1, y1, x2, y2 = map(int, [box[0], box[1], box[2], box[3]])
+        x1, y1 = max(0, x1), max(0, y1)
+        x2, y2 = min(w, x2), min(h, y2)
 
-        image_with_mask /= 255.0
-        ax.imshow(image_with_mask, alpha=0.5)
+        if x2 > x1 and y2 > y1:
+            box_mask = mask > 0.5
+            box_mask_resized = zoom(
+                box_mask,
+                (float(y2 - y1) / box_mask.shape[0], float(x2 - x1) / box_mask.shape[1]),
+                order=0
+            )
 
-    plt.axis('off')
-    plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
-    plt.close()
+            full_mask = np.zeros((h, w))
+            full_mask[y1:y2, x1:x2] = box_mask_resized
+
+            image_with_mask = np.array(image).astype(np.float32) / 255.0
+            if class_name == 'Thyroid tissue':
+                image_with_mask[full_mask > 0.5] = [0.4, 0, 0.4]  # фиолетовый
+            elif class_name == 'Carotis':
+                image_with_mask[full_mask > 0.5] = [1, 0.18, 1]    # ярко-розовый
+            elif class_name == 'background':
+                image_with_mask[full_mask > 0.5] = [1, 0.65, 0]   # оранжевый
+
+            ax.imshow(image_with_mask, alpha=0.5)
+
+    ax.axis('off')
+
+
+def plot_ground_truth(ax, image, ground_truth, class_names, title, true_mask=None):
+    ax.imshow(image)
+    ax.set_title(title)
+
+    color_map = {
+        'Thyroid tissue': [1, 0, 0],     # красный
+        'Carotis': [0, 1, 0],           # зеленый
+        'background': [1, 0.65, 0]      # оранжевый
+    }
+
+    if ground_truth is not None:
+        for ann in ground_truth:
+            box = ann['bbox']
+            box = [box[0], box[1], box[0] + box[2], box[1] + box[3]]
+
+            class_id = ann['category_id']
+            class_name = class_names[class_id]
+            color = color_map.get(class_name, 'black')
+
+            ax.add_patch(
+                plt.Rectangle((box[0], box[1]), box[2] - box[0], box[3] - box[1],
+                              fill=False, edgecolor=color, linewidth=2))
+            ax.text(box[0], box[1] - 10, class_name, color=color,
+                    fontsize=12, backgroundcolor='white')
+
+    if true_mask is not None:
+        image_with_mask = np.array(image).astype(np.float32) / 255.0
+
+        thyroid_tissue_mask = (true_mask == 1)
+        carotis_mask = (true_mask == 2)
+
+        if thyroid_tissue_mask.any():
+            image_with_mask[thyroid_tissue_mask] = [1, 0, 0]
+        if carotis_mask.any():
+            image_with_mask[carotis_mask] = [0, 1, 0]
+
+        ax.imshow(image_with_mask, alpha=0.3)
+
+    ax.axis('off')
+
+
+def load_ground_truth(image_filename, annotations_folder):
+    base_name = os.path.splitext(image_filename)[0]
+    annotation_path = os.path.join(annotations_folder, f"{base_name}.json")
+
+    if not os.path.exists(annotation_path):
+        return None
+
+    with open(annotation_path) as f:
+        data = json.load(f)
+
+    return data.get('annotations', [])
+
+
+def load_true_mask(image_filename, masks_folder):
+    base_name = os.path.splitext(image_filename)[0]
+    base_name = base_name.split('_')[0]
+
+    matching_masks = [f for f in os.listdir(masks_folder)
+                      if f.startswith(f"{base_name}_") and f.endswith('.png')]
+
+    if not matching_masks:
+        print(f"Маски для {image_filename} не найдены.")
+        return None
+
+    full_mask = np.zeros((528, 528), dtype=np.uint8)
+
+    for mask_file in matching_masks:
+        mask_path = os.path.join(masks_folder, mask_file)
+
+        try:
+            mask = Image.open(mask_path).convert('L')
+            mask_array = np.array(mask)
+            mask_array = (mask_array > 128).astype(np.uint8)
+
+            if 'Thyroid_tissue' in mask_file:
+                class_value = 1
+            elif 'Carotis' in mask_file:
+                class_value = 2
+            else:
+                print(f"Неизвестный класс для маски: {mask_file}")
+                continue
+
+            full_mask[mask_array == 1] = class_value
+
+        except Exception as e:
+            print(f"Ошибка загрузки маски {mask_file}: {e}")
+            continue
+
+    return full_mask
 
 
 class_names = ['background', 'Thyroid tissue', 'Carotis']
@@ -60,22 +183,32 @@ model = maskrcnn_resnet50_fpn_v2(weights=MaskRCNN_ResNet50_FPN_V2_Weights.DEFAUL
 num_classes = len(class_names)
 in_features = model.roi_heads.box_predictor.cls_score.in_features
 model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(in_features, num_classes)
+
 in_features_mask = model.roi_heads.mask_predictor.conv5_mask.in_channels
 model.roi_heads.mask_predictor = torchvision.models.detection.mask_rcnn.MaskRCNNPredictor(in_features_mask, 256, num_classes)
 
 model.load_state_dict(torch.load('mask_rcnn_model_screen.pth', weights_only=True))
 model.eval()
 
-transform = T.Compose([T.ToTensor()])
-input_folder = '../dataset_coco_neuro_1/val/images/'
-output_folder = '../predict_mask_rcnn_screen_val_NEW/'
+model.transform = torchvision.models.detection.transform.GeneralizedRCNNTransform(
+    min_size=528, max_size=528, image_mean=[0.485, 0.456, 0.406], image_std=[0.229, 0.224, 0.225]
+)
 
+transform = T.Compose([T.ToTensor()])
+
+input_folder = '../dataset_coco_neuro_1/images_neuro_1/'
+annotations_folder = '../dataset_coco_neuro_1/ann_neuro_1/'
+masks_folder = '../dataset_coco_neuro_1/masks/'
+
+output_folder = '../predict_mask_rcnn_screen/'
 os.makedirs(output_folder, exist_ok=True)
 
 for filename in os.listdir(input_folder):
     if filename.endswith(".jpg") or filename.endswith(".png"):
         image_path = os.path.join(input_folder, filename)
         image = Image.open(image_path).convert("RGB")
+        ground_truth = load_ground_truth(filename, annotations_folder)
+        true_mask = load_true_mask(filename, masks_folder)
         image_tensor = transform(image).unsqueeze(0)
 
         device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
@@ -86,6 +219,7 @@ for filename in os.listdir(input_folder):
             prediction = model(image_tensor)
 
         output_path = os.path.join(output_folder, f"pred_{filename}")
-        save_image_with_predictions(image, prediction, class_names, output_path, threshold=0.5)
+        save_image_with_predictions(image, prediction, class_names, output_path, threshold=0.5,
+                                    ground_truth=ground_truth, true_mask=true_mask)
 
 print("Предсказания сохранены.")

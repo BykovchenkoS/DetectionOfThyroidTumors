@@ -4,11 +4,11 @@ import json
 import os
 import shutil
 
-input_annotation_dir_1 = "dataset_coco_neuro_1/ann_neuro_1"
-input_annotation_dir_2 = "dataset_coco_neuro_2/ann_neuro_2"
+input_annotation_dir_1 = "../../dataset_coco_neuro_1/ann_neuro_1"
+input_annotation_dir_2 = "../../dataset_coco_neuro_2/ann_neuro_2"
 
-output_image_dir = "dataset_node/img"
-output_annotation_dir = "dataset_node/ann"
+output_image_dir = "../../dataset_node/img"
+output_annotation_dir = "../../dataset_node/ann"
 
 os.makedirs(output_image_dir, exist_ok=True)
 os.makedirs(output_annotation_dir, exist_ok=True)
