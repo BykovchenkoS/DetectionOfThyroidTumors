@@ -14,8 +14,8 @@ from torchmetrics.detection.mean_ap import MeanAveragePrecision
 from torchmetrics import Precision, Recall, F1Score
 from torchvision.ops import box_iou
 
-PREDICTIONS_DIR = "detr_predictions"
-VISUALIZATIONS_DIR = "detr_visualizations"
+PREDICTIONS_DIR = "../detr_predictions"
+VISUALIZATIONS_DIR = "../detr_visualizations"
 os.makedirs(PREDICTIONS_DIR, exist_ok=True)
 os.makedirs(VISUALIZATIONS_DIR, exist_ok=True)
 
@@ -126,8 +126,8 @@ def calculate_metrics(model, data_loader, device):
 
 if __name__ == '__main__':
     val_dataset = ValidationDataset(
-        images_dir='dataset_coco_neuro_1/val/images',
-        annotations_dir='dataset_coco_neuro_1/val/annotations',
+        images_dir='../dataset_coco_neuro_1/val/images',
+        annotations_dir='../dataset_coco_neuro_1/val/annotations',
         transforms=get_transform(train=False)
     )
     val_data_loader = DataLoader(
@@ -140,14 +140,14 @@ if __name__ == '__main__':
     model, _, postprocessors = get_model_instance_segmentation(num_classes)
     model.to(device)
 
-    model_path = "my_detr/detr_screen.pth"
+    model_path = "detr_screen.pth"
     model.load_state_dict(torch.load(model_path, map_location=device))
     model.eval()
 
     postprocessor = PostProcess()
     postprocessor_seg = PostProcessSegm()
 
-    image_files = sorted(os.listdir('dataset_for_search_1/val/images'))
+    image_files = sorted(os.listdir('../dataset_for_search_1/val/images'))
 
     for i, (images, targets) in enumerate(val_data_loader):
         if isinstance(images, NestedTensor):
@@ -165,7 +165,7 @@ if __name__ == '__main__':
 
         for j, result in enumerate(results_seg):
             image_filename = image_files[i * val_data_loader.batch_size + j]
-            image_path = os.path.join('dataset_for_search_1/val/images', image_filename)
+            image_path = os.path.join('../dataset_for_search_1/val/images', image_filename)
             original_image = cv2.imread(image_path)
             original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)  # Конвертация в RGB
 

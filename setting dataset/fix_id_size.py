@@ -1,7 +1,7 @@
 import json
 import os
 
-input_annotation_dir = "dataset_node/ann"
+input_annotation_dir = "../dataset_node/ann"
 output_annotation_dir = "dataset_node/ann_fixed"
 
 os.makedirs(output_annotation_dir, exist_ok=True)

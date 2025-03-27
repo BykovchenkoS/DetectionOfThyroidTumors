@@ -274,14 +274,14 @@ def objective(trial):
     transform = T.Compose([T.ToTensor()])
 
     train_dataset = CustomDataset(
-        images_dir='dataset_for_search_2/train/images',
-        annotations_dir='dataset_for_search_2/train/annotations',
+        images_dir='../dataset_for_search_2/train/images',
+        annotations_dir='../dataset_for_search_2/train/annotations',
         transforms=transform
     )
 
     val_dataset = CustomDataset(
-        images_dir='dataset_for_search_2/val/images',
-        annotations_dir='dataset_for_search_2/val/annotations',
+        images_dir='../dataset_for_search_2/val/images',
+        annotations_dir='../dataset_for_search_2/val/annotations',
         transforms=T.ToTensor()
     )
 

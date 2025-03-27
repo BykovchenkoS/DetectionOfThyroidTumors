@@ -139,13 +139,13 @@ def objective(trial):
     model.to(device)
 
     train_dataset = CustomDataset(
-        images_dir='dataset_for_search_1/train/images',
-        annotations_dir='dataset_for_search_1/train/annotations',
+        images_dir='../dataset_for_search_1/train/images',
+        annotations_dir='../dataset_for_search_1/train/annotations',
         transforms=get_transform(train=True)
     )
     val_dataset = CustomDataset(
-        images_dir='dataset_for_search_1/val/images',
-        annotations_dir='dataset_for_search_1/val/annotations',
+        images_dir='../dataset_for_search_1/val/images',
+        annotations_dir='../dataset_for_search_1/val/annotations',
         transforms=get_transform(train=False)
     )
 

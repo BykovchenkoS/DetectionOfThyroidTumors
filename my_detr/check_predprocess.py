@@ -196,8 +196,8 @@ def check_data():
     )
 
     train_dataset = CustomDataset(
-        images_dir="dataset_coco_neuro_1/train/images",
-        annotations_dir="dataset_coco_neuro_1/train/annotations",
+        images_dir="../dataset_coco_neuro_1/train/images",
+        annotations_dir="../dataset_coco_neuro_1/train/annotations",
         processor=processor
     )
 
