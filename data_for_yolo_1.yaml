@@ -1,0 +1,5 @@
+train: C:\ITMO\Diploma\DetectionOfThyroidTumors\dataset_yolo_neuro_1\images\train
+val: C:\ITMO\Diploma\DetectionOfThyroidTumors\dataset_yolo_neuro_1\images\val
+
+nc: 2
+names: ['Thyroid tissue', 'Carotis']

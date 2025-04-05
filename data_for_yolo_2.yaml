@@ -1,0 +1,5 @@
+train: C:\ITMO\Diploma\DetectionOfThyroidTumors\dataset_yolo_neuro_2\images\train
+val: C:\ITMO\Diploma\DetectionOfThyroidTumors\dataset_yolo_neuro_2\images\val
+
+nc: 1
+names: ['Node']
