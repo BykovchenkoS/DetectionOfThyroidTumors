@@ -11,7 +11,7 @@ from transformers import DetrImageProcessor
 from pycocotools import mask as coco_mask
 
 
-log_file = "data_check.log"
+log_file = "my_detr/data_check.log"
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -196,8 +196,8 @@ def check_data():
     )
 
     train_dataset = CustomDataset(
-        images_dir="../dataset_coco_neuro_1/train/images",
-        annotations_dir="../dataset_coco_neuro_1/train/annotations",
+        images_dir="dataset_coco_neuro_1/train/images",
+        annotations_dir="dataset_coco_neuro_1/train/annotations",
         processor=processor
     )
 

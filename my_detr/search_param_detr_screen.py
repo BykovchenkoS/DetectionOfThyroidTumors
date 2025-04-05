@@ -1,11 +1,10 @@
 import optuna
-from optuna.trial import TrialState
 import torch.optim as optim
 from torch.optim.lr_scheduler import StepLR, CosineAnnealingLR, ReduceLROnPlateau
 from tqdm import tqdm
 import logging
 import torch
-from my_detr.DETR_neural_network import CustomDataset, get_model_instance_segmentation
+from DETR_neural_network import CustomDataset, get_model_instance_segmentation
 from detr.util.misc import collate_fn as default_collate_fn
 import torchvision.transforms as T
 from torchvision.ops import box_iou

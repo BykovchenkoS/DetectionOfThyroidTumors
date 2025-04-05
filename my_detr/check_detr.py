@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from detr.models.detr import PostProcess, PostProcessSegm
 from detr.util.misc import collate_fn as default_collate_fn
 from detr.util.misc import NestedTensor
-from my_detr.DETR_neural_network import CustomDataset, get_model_instance_segmentation
+from DETR_neural_network import CustomDataset, get_model_instance_segmentation
 import json
 import cv2
 from torchmetrics.detection.mean_ap import MeanAveragePrecision

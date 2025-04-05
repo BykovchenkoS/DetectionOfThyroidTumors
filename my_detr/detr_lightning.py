@@ -346,8 +346,8 @@ if __name__ == "__main__":
     )
 
     train_dataset = CustomDataset(
-        images_dir="../dataset_coco_neuro_1/train/images",
-        annotations_dir="../dataset_coco_neuro_1/train/annotations",
+        images_dir="dataset_coco_neuro_1/train/images",
+        annotations_dir="dataset_coco_neuro_1/train/annotations",
         processor=processor
     )
 
@@ -363,8 +363,8 @@ if __name__ == "__main__":
         #     logging.info(f"Masks shape: {target['masks'].shape}")
 
     val_dataset = CustomDataset(
-        images_dir="../dataset_coco_neuro_1/val/images",
-        annotations_dir="../dataset_coco_neuro_1/val/annotations",
+        images_dir="dataset_coco_neuro_1/val/images",
+        annotations_dir="dataset_coco_neuro_1/val/annotations",
         processor=processor
     )
 

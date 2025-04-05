@@ -147,7 +147,7 @@ def get_model_instance_segmentation(num_classes):
     return model, criterion, postprocessors
 
 
-output_file = "detr_training_output_node.log"
+output_file = "detr_training_output_screen.log"
 
 
 class Logger:
@@ -171,8 +171,8 @@ sys.stderr = sys.stdout
 
 if __name__ == '__main__':
     train_dataset = CustomDataset(
-        images_dir='../dataset_coco_neuro_2/train/images',
-        annotations_dir='../dataset_coco_neuro_2/train/annotations',
+        images_dir='dataset_coco_neuro_1/train/images',
+        annotations_dir='dataset_coco_neuro_1/train/annotations',
         transforms=get_transform(train=True)
     )
     train_data_loader = DataLoader(
@@ -196,7 +196,7 @@ if __name__ == '__main__':
 
         epoch_metrics = train_one_epoch(model, criterion, train_data_loader, optimizer, device, epoch)
 
-    model_path = "detr_node.pth"
+    model_path = "detr_screen.pth"
     torch.save(model.state_dict(), model_path)
     print("Model has been successfully trained and saved!")
 
