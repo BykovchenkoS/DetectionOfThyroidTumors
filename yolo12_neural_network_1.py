@@ -61,7 +61,7 @@ def train_yolo():
         data = yaml.safe_load(f)
     class_names = data['names']
 
-    model = YOLO('yolov5mu.pt')
+    model = YOLO('yolo12m.pt')
     metrics_logger = ClassMetricsLogger(class_names)
 
     def on_val_end(validator):
