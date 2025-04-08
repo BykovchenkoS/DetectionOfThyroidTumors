@@ -18,7 +18,6 @@ def add_padding_to_mask(mask_path, output_path, target_size):
 
 
 def process_all_masks(masks_dir, output_masks_dir, target_size):
-    # Создаем выходную директорию, если её нет
     os.makedirs(output_masks_dir, exist_ok=True)
     mask_files = [f for f in os.listdir(masks_dir) if f.endswith(('.png', '.jpg', '.jpeg'))]
 
