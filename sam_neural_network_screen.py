@@ -15,13 +15,16 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import csv
 from sklearn.metrics import average_precision_score
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 CHECKPOINT_PATH = "sam_vit_h_4b8939.pth"
 MODEL_TYPE = "vit_h"
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 BATCH_SIZE = 4
 LR = 1e-4
-EPOCHS = 50
+EPOCHS = 25
+PATIENCE = 3
+MIN_DELTA = 1e-4
 MASKS_ROOT = "dataset_sam_neuro_1/masks/"
 
 CLASS_NAMES = ['Thyroid tissue', 'Carotis']
@@ -411,8 +414,10 @@ val_loader = DataLoader(
 
 optimizer = Adam(sam.mask_decoder.parameters(), lr=LR)
 criterion = nn.BCEWithLogitsLoss()
+scheduler = ReduceLROnPlateau(optimizer, 'min', patience=2, verbose=True)
 
 best_val_loss = float('inf')
+no_improve = 0
 
 for epoch in range(EPOCHS):
     sam.train()
@@ -509,6 +514,25 @@ for epoch in range(EPOCHS):
                     train_class_metrics[class_id][metric] /= train_class_metrics[class_id]['count']
 
     val_loss, val_class_metrics = evaluate_model(sam, val_loader, DEVICE, CLASS_IDS)
+    scheduler.step(val_loss)  # Обновляем learning rate на основе val_loss
+
+    # Проверка на улучшение валидационного лосса
+    if val_loss < best_val_loss - MIN_DELTA:
+        best_val_loss = val_loss
+        no_improve = 0
+        torch.save({
+            'mask_decoder_state_dict': sam.mask_decoder.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'epoch': epoch + 1,
+            'val_loss': val_loss,
+        }, "sam_best_screen.pth")
+        print("\nЛучшая модель сохранена!")
+    else:
+        no_improve += 1
+        print(f"\nНет улучшения {no_improve}/{PATIENCE}")
+        if no_improve >= PATIENCE:
+            print("Ранняя остановка!")
+            break
 
     save_epoch_metrics(epoch + 1, train_class_metrics, val_class_metrics)
 
@@ -543,7 +567,7 @@ for epoch in range(EPOCHS):
 torch.save({
     'mask_decoder_state_dict': sam.mask_decoder.state_dict(),
     'optimizer_state_dict': optimizer.state_dict(),
-    'epoch': EPOCHS,
+    'epoch': epoch + 1,
 }, "sam_finetuned_screen.pth")
 
-print("\nОбучение завершено! Модель сохранена в sam_final.pth")
+print("\nОбучение завершено! Модель сохранена в sam_final_screen.pth")

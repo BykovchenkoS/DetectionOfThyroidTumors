@@ -15,13 +15,16 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import csv
 from sklearn.metrics import average_precision_score
+from torch.optim.lr_scheduler import ReduceLROnPlateau
 
 CHECKPOINT_PATH = "sam_vit_h_4b8939.pth"
 MODEL_TYPE = "vit_h"
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 BATCH_SIZE = 4
 LR = 1e-4
-EPOCHS = 50
+EPOCHS = 25
+WEIGHT_DECAY = 1e-4
+PATIENCE = 3
 MASKS_ROOT = "dataset_sam_neuro_2/masks/"
 
 
@@ -203,15 +206,15 @@ val_loader = DataLoader(
     collate_fn=collate_fn
 )
 
-optimizer = Adam(sam.mask_decoder.parameters(), lr=LR)
+optimizer = Adam(sam.mask_decoder.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
 criterion = nn.BCEWithLogitsLoss()
+scheduler = ReduceLROnPlateau(optimizer, 'min', patience=3, verbose=True)
 
 
 def evaluate_model(model, val_loader, device):
     model.eval()
     total_loss = 0
     total_objects = 0
-
     metrics = {
         'accuracy': 0,
         'precision': 0,
@@ -261,7 +264,7 @@ def evaluate_model(model, val_loader, device):
                 ).squeeze(1)
 
                 valid_gt_masks = gt_masks[i][valid_indices]
-                loss = criterion(pred_masks, valid_gt_masks)
+                loss = F.binary_cross_entropy_with_logits(pred_masks, valid_gt_masks)
                 batch_loss += loss.item() * len(valid_boxes)
                 batch_objects += len(valid_boxes)
 
@@ -290,12 +293,13 @@ def evaluate_model(model, val_loader, device):
 
 
 best_val_loss = float('inf')
+no_improve = 0
 
 for epoch in range(EPOCHS):
     sam.train()
     epoch_loss = 0
     total_objects = 0
-    metrics = {
+    train_metrics = {
         'accuracy': 0,
         'precision': 0,
         'recall': 0,
@@ -305,7 +309,7 @@ for epoch in range(EPOCHS):
         'map': 0
     }
 
-    for batch_idx, batch in enumerate(tqdm(train_loader, desc=f"Epoch {epoch + 1}/{EPOCHS}")):
+    for batch in tqdm(train_loader, desc=f"Epoch {epoch + 1}/{EPOCHS}"):
         images = batch["image"].to(DEVICE)
         boxes = batch["boxes"].to(DEVICE)
         gt_masks = batch["masks"].to(DEVICE)
@@ -352,14 +356,14 @@ for epoch in range(EPOCHS):
 
             for pred, gt in zip(pred_masks, valid_gt_masks):
                 acc, prec, rec, iou = calculate_metrics(pred.unsqueeze(0), gt.unsqueeze(0))
-                metrics['accuracy'] += acc
-                metrics['precision'] += prec
-                metrics['recall'] += rec
-                metrics['iou'] += iou
+                train_metrics['accuracy'] += acc
+                train_metrics['precision'] += prec
+                train_metrics['recall'] += rec
+                train_metrics['iou'] += iou
                 map50, map95, map_value = calculate_map(pred.unsqueeze(0), gt.unsqueeze(0))
-                metrics['map50'] += map50
-                metrics['map95'] += map95
-                metrics['map'] += map_value
+                train_metrics['map50'] += map50
+                train_metrics['map95'] += map95
+                train_metrics['map'] += map_value
 
         if batch_objects > 0:
             loss = total_loss / batch_objects
@@ -370,40 +374,63 @@ for epoch in range(EPOCHS):
 
     if total_objects > 0:
         epoch_loss /= total_objects
-        for key in metrics:
-            metrics[key] /= total_objects
+        for key in train_metrics:
+            train_metrics[key] /= total_objects
 
-    print(f"Epoch {epoch + 1}, Loss: {epoch_loss:.4f}, "
-          f"Accuracy: {metrics['accuracy']:.4f}, Precision: {metrics['precision']:.4f}, "
-          f"Recall: {metrics['recall']:.4f}, IoU: {metrics['iou']:.4f}, "
-          f"mAP50: {metrics['map50']:.4f}, mAP95: {metrics['map95']:.4f}, mAP: {metrics['map']:.4f}")
+    print(f"Epoch {epoch + 1}, Train Loss: {epoch_loss:.4f}, "
+          f"Accuracy: {train_metrics['accuracy']:.4f}, Precision: {train_metrics['precision']:.4f}, "
+          f"Recall: {train_metrics['recall']:.4f}, IoU: {train_metrics['iou']:.4f}, "
+          f"mAP50: {train_metrics['map50']:.4f}, mAP95: {train_metrics['map95']:.4f}, mAP: {train_metrics['map']:.4f}")
 
     save_metrics_to_csv({
         "epoch": epoch + 1,
         "loss": epoch_loss,
-        "accuracy": metrics['accuracy'],
-        "precision": metrics['precision'],
-        "recall": metrics['recall'],
-        "iou": metrics['iou'],
-        "map50": metrics['map50'],
-        "map95": metrics['map95'],
-        "map": metrics['map']
+        "accuracy": train_metrics['accuracy'],
+        "precision": train_metrics['precision'],
+        "recall": train_metrics['recall'],
+        "iou": train_metrics['iou'],
+        "map50": train_metrics['map50'],
+        "map95": train_metrics['map95'],
+        "map": train_metrics['map'],
+        "phase": "train"
     })
 
     val_loss, val_metrics = evaluate_model(sam, val_loader, DEVICE)
+    scheduler.step(val_loss)
+
     print(f"Validation Loss: {val_loss:.4f}, "
           f"Accuracy: {val_metrics['accuracy']:.4f}, Precision: {val_metrics['precision']:.4f}, "
           f"Recall: {val_metrics['recall']:.4f}, IoU: {val_metrics['iou']:.4f}, "
-          f"mAP50: {val_metrics['map50']:.4f}, mAP95: {val_metrics['map95']:.4f}, "
-          f"mAP: {val_metrics['map']:.4f}")
+          f"mAP50: {val_metrics['map50']:.4f}, mAP95: {val_metrics['map95']:.4f}, mAP: {val_metrics['map']:.4f}")
 
+    save_metrics_to_csv({
+        "epoch": epoch + 1,
+        "loss": val_loss,
+        "accuracy": val_metrics['accuracy'],
+        "precision": val_metrics['precision'],
+        "recall": val_metrics['recall'],
+        "iou": val_metrics['iou'],
+        "map50": val_metrics['map50'],
+        "map95": val_metrics['map95'],
+        "map": val_metrics['map'],
+        "phase": "val"
+    })
+
+    # Ранняя остановка
     if val_loss < best_val_loss:
         best_val_loss = val_loss
+        no_improve = 0
         torch.save({
             'mask_decoder_state_dict': sam.mask_decoder.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
         }, "sam_best_node.pth")
         print("Лучшая модель сохранена!")
+    else:
+        no_improve += 1
+        print(f"Нет улучшения {no_improve}/{PATIENCE}")
+        if no_improve >= PATIENCE:
+            print("Ранняя остановка!")
+            break
 
 torch.save({
     'mask_decoder_state_dict': sam.mask_decoder.state_dict(),
