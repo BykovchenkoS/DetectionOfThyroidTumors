@@ -8,11 +8,11 @@ from tqdm import tqdm
 
 CHECKPOINT_PATH = "sam_vit_h_4b8939.pth"
 MODEL_TYPE = "vit_h"
-FINE_TUNED_MODEL_PATH = "sam_finetuned_node.pth"
+FINE_TUNED_MODEL_PATH = "sam_best_node.pth"
 DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-INFERENCE_IMAGES_DIR = "dataset_sam_neuro_222/val/images"
-ANNOTATIONS_DIR = "dataset_sam_neuro_222/val/annotations"
-OUTPUT_DIR = "sam_predictions_visualized"
+INFERENCE_IMAGES_DIR = "dataset_sam_neuro_2/val/images"
+ANNOTATIONS_DIR = "dataset_sam_neuro_2/val/annotations"
+OUTPUT_DIR = "sam_predictions_visualized_node"
 MASKS_DIR = os.path.join(OUTPUT_DIR, "masks")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
