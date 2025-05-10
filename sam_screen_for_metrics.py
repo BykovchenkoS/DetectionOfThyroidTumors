@@ -109,7 +109,7 @@ def calculate_object_metrics(pred_mask, true_mask):
 
 def calculate_class_map(all_true_masks, all_pred_scores):
     if not all_true_masks:
-        return {"map50": 0.0, "map95": 0.0, "map": 0.0}
+        return {"map50": 0.0, "map95": 0.0, "map50-95": 0.0}
     y_true = np.concatenate([mask.flatten() for mask in all_true_masks])
     y_pred = np.concatenate([score.flatten() for score in all_pred_scores])
     thresholds = np.linspace(0.5, 0.95, 10)
@@ -121,7 +121,7 @@ def calculate_class_map(all_true_masks, all_pred_scores):
     return {
         "map50": float(aps[0]) if aps else 0.0,
         "map95": float(aps[-1]) if aps else 0.0,
-        "map": float(np.mean(aps)) if aps else 0.0
+        "map50-95": float(np.mean(aps)) if aps else 0.0
     }
 
 
@@ -315,7 +315,7 @@ def main():
                 **metrics
             },
             CSV_METRICS_PATH,
-            ['epoch', 'phase', 'class_id', 'class_name', 'accuracy', 'precision', 'recall', 'iou', 'map50', 'map95', 'map']
+            ['epoch', 'phase', 'class_id', 'class_name', 'accuracy', 'precision', 'recall', 'iou', 'map50', 'map95', 'map50-95']
         )
 
     for obj in per_object_results:

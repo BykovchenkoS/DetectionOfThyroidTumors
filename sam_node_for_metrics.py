@@ -110,13 +110,13 @@ def calculate_map(pred_mask, true_mask, thresholds=np.linspace(0.5, 0.95, 10)):
     return {
         "map50": float(map50),
         "map95": float(map95),
-        "map": float(map)
+        "map50-95": float(map)
     }
 
 
 def save_epoch_metrics(epoch, phase, metrics_dict, filename=CSV_METRICS_PATH):
     fieldnames = ['epoch', 'phase', 'class_id', 'class_name', 'accuracy', 'precision', 'recall', 'iou', 'map50', 'map95',
-                  'map']
+                  'map50-95']
     file_exists = os.path.isfile(filename)
     with open(filename, mode='a', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -134,14 +134,14 @@ def save_epoch_metrics(epoch, phase, metrics_dict, filename=CSV_METRICS_PATH):
                 'iou': metrics['iou'],
                 'map50': metrics['map50'],
                 'map95': metrics['map95'],
-                'map': metrics['map']
+                'map50-95': metrics['map50']
             }
             writer.writerow(row)
 
 
 def save_per_object_metrics(epoch, phase, object_list, filename=CSV_PER_OBJECT_PATH):
     fieldnames = ['epoch', 'phase', 'image_name', 'obj_idx', 'class_id', 'class_name',
-                  'accuracy', 'precision', 'recall', 'iou', 'map50', 'map95', 'map']
+                  'accuracy', 'precision', 'recall', 'iou', 'map50', 'map95', 'map50-95']
     file_exists = os.path.isfile(filename)
     with open(filename, mode='a', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -214,7 +214,7 @@ sam.eval()
 
 metrics_per_class = {cls_id: {
     'accuracy': [], 'precision': [], 'recall': [], 'iou': [],
-    'map50': [], 'map95': [], 'map': [], 'count': 0
+    'map50': [], 'map95': [], 'map50-95': [], 'count': 0
 } for cls_id in CLASS_IDS}
 
 all_gt_classes = []
@@ -293,7 +293,7 @@ for img_idx, img_name in enumerate(tqdm(image_files, desc="Inference")):
                 'iou': metrics['iou'],
                 'map50': map_metrics['map50'],
                 'map95': map_metrics['map95'],
-                'map': map_metrics['map']
+                'map50-95': map_metrics['map50-95']
             })
 
             metrics_per_class[class_id]['accuracy'].append(metrics['accuracy'])
@@ -302,7 +302,7 @@ for img_idx, img_name in enumerate(tqdm(image_files, desc="Inference")):
             metrics_per_class[class_id]['iou'].append(metrics['iou'])
             metrics_per_class[class_id]['map50'].append(map_metrics['map50'])
             metrics_per_class[class_id]['map95'].append(map_metrics['map95'])
-            metrics_per_class[class_id]['map'].append(map_metrics['map'])
+            metrics_per_class[class_id]['map50-95'].append(map_metrics['map50-95'])
             metrics_per_class[class_id]['count'] += 1
 
             all_gt_classes.append(class_id)
@@ -334,7 +334,7 @@ for cls_id in CLASS_IDS:
         'iou': np.mean(metrics_per_class[cls_id]['iou']),
         'map50': np.mean(metrics_per_class[cls_id]['map50']),
         'map95': np.mean(metrics_per_class[cls_id]['map95']),
-        'map': np.mean(metrics_per_class[cls_id]['map'])
+        'map50-95': np.mean(metrics_per_class[cls_id]['map50-95'])
     }
 
 save_epoch_metrics(1, "test", final_metrics)
