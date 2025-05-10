@@ -6,16 +6,28 @@ from pathlib import Path
 import os
 import csv
 
-weights_path = 'YOLO_result/train4_node_yolo5/weights/best.pt'
+weights_path = 'YOLO_result/train7_screen_yolo12/weights/best.pt'
 model = YOLO(weights_path)
 
-images_path = 'dataset_yolo_neuro_2/images/val'
+images_path = 'dataset_yolo_neuro_1/images/val'
 image_files = list(Path(images_path).glob('*.jpg'))
 
-results_dir = 'predict_yolo_5_node'
+results_dir = 'predict_yolo_12_screen'
 os.makedirs(results_dir, exist_ok=True)
 
 iou_csv_path = Path(results_dir) / 'iou_results_per_object.csv'
+
+class_names = {0: 'Thyroid tissue', 1: 'Carotis'}
+
+prediction_colors = {
+    0: (0 / 255, 255 / 255, 0 / 255),
+    1: (255 / 255, 0 / 255, 0 / 255)
+}
+
+ground_truth_colors = {
+    0: (128 / 255, 0 / 255, 128 / 255),
+    1: (255 / 255, 255 / 255, 0 / 255)
+}
 
 
 def parse_yolo_label(label_path, img_width, img_height):
@@ -61,15 +73,16 @@ def calculate_iou(box1, box2):
     return iou
 
 
-def plot_boxes(ax, boxes, color, title, show_confidence=False):
+def plot_boxes(ax, boxes, colors, title, show_confidence=False):
     for box in boxes:
         if show_confidence:
             cls, x1, y1, x2, y2, conf = box
-            label = f"{model.names[cls]} {conf:.2f}"
+            label = f"{class_names[cls]} {conf:.2f}"
         else:
             cls, x1, y1, x2, y2 = box
-            label = model.names[cls]
+            label = class_names[cls]
 
+        color = colors[cls]
         ax.add_patch(plt.Rectangle((x1, y1), x2 - x1, y2 - y1, fill=False, edgecolor=color, linewidth=2))
         ax.text(x1, y1 - 10, label, fontsize=12, color=color, bbox=dict(facecolor='white', alpha=0.5))
 
@@ -83,16 +96,16 @@ def visualize_predictions(image, predictions, ground_truth=None):
     if ground_truth:
         ax_pred = axes[0]
         ax_pred.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-        plot_boxes(ax_pred, predictions, 'green', 'Predictions', show_confidence=True)
+        plot_boxes(ax_pred, predictions, prediction_colors, 'Predictions', show_confidence=True)
 
         ax_gt = axes[1]
         ax_gt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-        plot_boxes(ax_gt, ground_truth, 'red', 'Ground Truth')
+        plot_boxes(ax_gt, ground_truth, ground_truth_colors, 'Ground Truth')
 
     else:
         ax = axes
         ax.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-        plot_boxes(ax, predictions, 'green', 'Predictions', show_confidence=True)
+        plot_boxes(ax, predictions, prediction_colors, 'Predictions', show_confidence=True)
 
     plt.tight_layout()
     return fig
@@ -115,18 +128,9 @@ with open(iou_csv_path, mode='w', newline='') as csv_file:
                 cls = int(box.cls[0].item())
                 predictions.append((cls, x1, y1, x2, y2, conf))
 
-        filtered_predictions = []
-        max_confidences = {}
+        filtered_predictions = predictions
 
-        for pred in predictions:
-            cls, x1, y1, x2, y2, conf = pred
-            if cls not in max_confidences or conf > max_confidences[cls]:
-                max_confidences[cls] = conf
-                filtered_predictions = [pred]
-            elif conf == max_confidences[cls]:
-                filtered_predictions.append(pred)
-
-        label_path = Path(f'dataset_yolo_neuro_2/labels/val/{image_path.stem}.txt')
+        label_path = Path(f'dataset_yolo_neuro_1/labels/val/{image_path.stem}.txt')
 
         ground_truth = None
         if label_path.exists():
@@ -141,15 +145,23 @@ with open(iou_csv_path, mode='w', newline='') as csv_file:
 
                 for gt in ground_truth:
                     gt_cls, x1_gt, y1_gt, x2_gt, y2_gt = gt
-                    iou = calculate_iou((x1_pred, y1_pred, x2_pred, y2_pred), (x1_gt, y1_gt, x2_gt, y2_gt))
 
-                    if iou > best_iou:
-                        best_iou = iou
-                        best_gt = gt
+                    if pred_cls == gt_cls:
+                        iou = calculate_iou((x1_pred, y1_pred, x2_pred, y2_pred), (x1_gt, y1_gt, x2_gt, y2_gt))
+
+                        if iou > best_iou:
+                            best_iou = iou
+                            best_gt = gt
 
                 if best_gt:
                     gt_cls, _, _, _, _ = best_gt
-                    writer.writerow([image_path.name, object_id, model.names[pred_cls], model.names[gt_cls], best_iou])
+                    writer.writerow([
+                        image_path.name,
+                        object_id,
+                        class_names[pred_cls],
+                        class_names[gt_cls],
+                        round(best_iou, 4)
+                    ])
                     object_id += 1
 
         fig = visualize_predictions(img, filtered_predictions, ground_truth)
@@ -158,3 +170,29 @@ with open(iou_csv_path, mode='w', newline='') as csv_file:
         fig.savefig(str(output_path), bbox_inches='tight', pad_inches=0.5)
 
         plt.close(fig)
+
+
+val_results = model.val(
+    data='YOLO_result/train7_screen_yolo12/data_for_yolo_1.yaml',
+    split='val',
+    iou=0.5,
+    save_json=True
+)
+
+metrics_csv_path = Path(results_dir) / 'validation_metrics.csv'
+
+with open(metrics_csv_path, mode='w', newline='') as csv_file:
+    writer = csv.writer(csv_file)
+    writer.writerow(['Metric Type', 'Class', 'Precision (P)', 'Recall (R)', 'mAP50', 'mAP50-95'])
+    writer.writerow(['All classes', 'ALL',
+                     val_results.box.mp,
+                     val_results.box.mr,
+                     val_results.box.map50,
+                     val_results.box.map])
+
+    for i, class_name in enumerate(class_names.values()):
+        writer.writerow(['Per class', class_name,
+                         val_results.box.p[i],
+                         val_results.box.r[i],
+                         val_results.box.ap50[i],
+                         val_results.box.ap[i]])
