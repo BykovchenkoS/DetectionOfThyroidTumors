@@ -16,9 +16,9 @@ import seaborn as sns
 class Config:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model_path = 'retinanet_model_node.pth'
-    test_image_dir = '../dataset_coco_neuro_3/images_neuro_3'
-    test_annotations_dir = '../dataset_coco_neuro_3/ann'
-    output_dir = '../predict_retinanet_node'
+    test_image_dir = '../dataset_coco_neuro_3/val/images'
+    test_annotations_dir = '../dataset_coco_neuro_3/val/annotations'
+    output_dir = '../predict_retinanet_node04'
     confidence_threshold = 0.4
     class_names = {
         1: 'Node',

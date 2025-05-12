@@ -16,10 +16,10 @@ import seaborn as sns
 class Config:
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model_path = 'retinanet_model_screen.pth'
-    test_image_dir = '../dataset_coco_neuro_1/images_neuro_1'
-    test_annotations_dir = '../dataset_coco_neuro_1/ann_neuro_1'
-    output_dir = '../predict_retinanet_screen'
-    confidence_threshold = 0.4
+    test_image_dir = '../dataset_coco_neuro_1/val/images'
+    test_annotations_dir = '../dataset_coco_neuro_1/val/annotations'
+    output_dir = '../predict_retinanet_screen_0.5'
+    confidence_threshold = 0.5
     class_names = {
         1: 'Thyroid tissue',
         2: 'Carotis',
