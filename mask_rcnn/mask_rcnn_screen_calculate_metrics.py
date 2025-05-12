@@ -22,7 +22,7 @@ class Config:
     test_image_dir = 'dataset_coco_neuro_1/val/images'
     test_annotations_dir = 'dataset_coco_neuro_1/val/annotations'
     masks_folder = 'dataset_coco_neuro_1/masks'
-    output_dir = 'predict_mask_rcnn_screen_metrics'
+    output_dir = 'predict_mask_rcnn_screen_metrics_new'
 
     confidence_threshold = 0.5
 
@@ -79,6 +79,9 @@ def plot_predictions(ax, image, predictions, title):
     ax.imshow(image)
     ax.set_title(title)
 
+    full_mask = np.zeros((image.size[1], image.size[0]), dtype=np.uint8)
+    image_with_mask = np.array(image).astype(np.float32) / 255.0
+
     for box, label, mask in zip(boxes, labels, masks):
         class_name = Config.class_names[label]
         color = Config.colors.get(class_name, 'black')
@@ -87,37 +90,38 @@ def plot_predictions(ax, image, predictions, title):
             plt.Rectangle((box[0], box[1]), box[2] - box[0], box[3] - box[1],
                           fill=False, edgecolor=color, linewidth=2)
         )
-
         ax.text(box[0], box[1] - 10, class_name, color=color,
                 fontsize=12, backgroundcolor='white')
 
-        mask = mask[0]
+        mask = mask[0] > 0.5
         h, w = image.size[1], image.size[0]
-
         x1, y1, x2, y2 = map(int, [box[0], box[1], box[2], box[3]])
         x1, y1 = max(0, x1), max(0, y1)
         x2, y2 = min(w, x2), min(h, y2)
 
         if x2 > x1 and y2 > y1:
-            box_mask = mask > 0.5
-            box_mask_resized = zoom(
-                box_mask,
-                (float(y2 - y1) / box_mask.shape[0], float(x2 - x1) / box_mask.shape[1]),
+            resized_mask = zoom(
+                mask,
+                (float(y2 - y1) / mask.shape[0], float(x2 - x1) / mask.shape[1]),
                 order=0
             )
+            full_mask[y1:y2, x1:x2] = np.where(resized_mask, label, full_mask[y1:y2, x1:x2])
 
-            full_mask = np.zeros((h, w))
-            full_mask[y1:y2, x1:x2] = box_mask_resized
-    image_with_mask = np.array(image).astype(np.float32) / 255.0
-    if class_name in Config.colors:
-        color = Config.colors[class_name]
+    for class_id, class_name in enumerate(Config.class_names):
+        if class_id == 0:
+            continue
 
-        if isinstance(color, str):
-            from matplotlib.colors import to_rgb
-            color = to_rgb(color)
-        image_with_mask[full_mask > 0.5] = color
+        if class_name in Config.colors:
+            color = Config.colors[class_name]
+            if isinstance(color, str):
+                from matplotlib.colors import to_rgb
+                color = to_rgb(color)
+            class_mask = (full_mask == class_id)
+            if class_mask.any():
+                for c in range(3):
+                    image_with_mask[..., c][class_mask] = color[c] * 0.7 + image_with_mask[..., c][class_mask] * 0.3
 
-    ax.imshow(image_with_mask, alpha=0.5)
+    ax.imshow(image_with_mask, alpha=1.0)
     ax.axis('off')
 
 
@@ -332,7 +336,7 @@ def process_image_predictions(predictions, true_mask, image_name):
                 true_class = Config.class_names[class_id]
                 break
 
-        pred_mask[y1:y2, x1:x2][resized_mask] = label
+        pred_mask[y1:y2, x1:x2] = np.where(resized_mask, label, pred_mask[y1:y2, x1:x2])
 
         iou = calculate_iou(pred_mask, true_mask, label)
 
